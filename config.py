@@ -3,9 +3,9 @@ import os
 # default config
 class BaseConfig(object):
     DEBUG = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
     SECRET_KEY = 'sM\xe4\xfcF\xbf>9\x93\xdf\xfa\x98'
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
-    SQLALCHEMY_TRACK_MODIFICATIONS = True
     # print SQLALCHEMY_DATABASE_URI
    
 
