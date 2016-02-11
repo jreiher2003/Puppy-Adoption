@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+	<div class="col-xs-12 col-md-6 col-md-offset-3">
+<h1 class="text-center">Delete Puppy</h1>
+<p>Do you want to delete <mark>{{ deletepuppy.name }}</mark>?</p>
+<form method="post" action="">
+
+<input class="form-control btn btn-danger" type="submit" value="Delete Item">
+<a class="form-control btn btn-default" href="{{ url_for('puppy_profile',shelter_id=deletepuppy.shelter.id,shelter_name=deletepuppy.shelter.name_slug,puppy_id=deletepuppy.id) }}">Cancel</a>
+</form>
+
+{% endblock %}

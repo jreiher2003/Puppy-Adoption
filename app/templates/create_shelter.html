@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+
+		<p class="h3 text-center">Add a shelter</p>
+
+		<form method="post" action="">
+			{{ form.csrf_token }}
+			
+		<div class="form-group">
+		{{ form.name.label }}{{ form.name(class="form-control", placeholder="What is the name of the shelter...") }}<br>
+		<span class="error bg-danger">
+				{% if form.name.errors %}
+				{% for error in form.name.errors %}
+				<div class="bg-danger">{{ error }}</div>
+				{% endfor %}
+				{% endif %}
+			</span>
+		</div>
+
+		<div class="form-group">
+		{{ form.address.label }}{{ form.address(class="form-control", placeholder="Put the shelter address here...") }}<br>
+		<span class="error bg-danger">
+				{% if form.address.errors %}
+				{% for error in form.address.errors %}
+				<div class="bg-danger">{{ error }}</div>
+				{% endfor %}
+				{% endif %}
+			</span>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+				{{ form.city.label }}{{ form.city(class="form-control", placeholder="New York") }}<br>
+				<span class="error bg-danger">
+						{% if form.city.errors %}
+						{% for error in form.city.errors %}
+						<div class="bg-danger">{{ error }}</div>
+						{% endfor %}
+						{% endif %}
+					</span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+				{{ form.state.label }}{{ form.state(class="form-control") }}<br>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+				{{ form.zipCode.label }}{{ form.zipCode(class="form-control", placeholder="90201") }}<br>
+				<span class="error bg-danger">
+						{% if form.zipCode.errors %}
+						{% for error in form.zipCode.errors %}
+						<div class="bg-danger">{{ error }}</div>
+						{% endfor %}
+						{% endif %}
+					</span>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="form-group">
+		{{ form.website.label }}{{ form.website(class="form-control", type="url",placeholder="http//www.example.com") }}<br>
+		<span class="error bg-danger">
+				{% if form.website.errors %}
+				{% for error in form.website.errors %}
+				<div class="bg-danger">{{ error }}</div>
+				{% endfor %}
+				{% endif %}
+			</span>
+		</div>
+
+<div class="row">
+	<div class="col-md-6">
+			<div class="form-group">
+			{{ form.maximum_capacity.label }}{{ form.maximum_capacity(class="form-control", type="number", min="5",max="100", placeholder="0-100") }}<br>
+			<span class="error bg-danger">
+					{% if form.maximum_capacity.errors %}
+					{% for error in form.maximum_capacity.errors %}
+					<div class="bg-danger">{{ error }}</div>
+					{% endfor %}
+					{% endif %}
+				</span>
+			</div>
+	</div>
+	<div class="col-md-6">
+			<div class="form-group">
+			{{ form.current_capacity.label }}{{ form.current_capacity(class="form-control", placeholder='0-100', type="number",min='0',max='100') }}<br>
+			<span class="error bg-danger">
+					{% if form.current_capacity.errors %}
+					{% for error in form.current_capacity.errors %}
+					<div class="bg-danger">{{ error }}</div>
+					{% endfor %}
+					{% endif %}
+				</span>
+			</div>
+	</div>
+</div>
+
+		<div class="form-group">
+				{{ form.submit(class="form-control btn btn-danger") }}
+				<a class="form-control btn btn-default" href="{{url_for('index')}}">Cancel</a>
+		</div>
+
+	</div>
+</div>
+{% endblock %}
