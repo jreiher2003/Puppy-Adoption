@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-3">
+        <address>
+            <strong>{{ shelter_profile.name }}</strong><br>
+            {{ shelter_profile.address }}<br>
+            {{ shelter_profile.city }},&nbsp;{{ shelter_profile.state }}&nbsp;{{ shelter_profile.zip }}<br>
+            <a href="{{ shelter_profile.website }}">{{ shelter_profile.website }}</a>
+        </address>
+    </div><!-- end col-md-3 -->
+
+
+    <div class="col-md-8">
+    	<div class="row carousel-holder">
+    		<div class="col-md-12">
+    			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    				<ol class="carousel-indicators">
+                      
+                      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                      
+    					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    					<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    				</ol>
+    				<div class="carousel-inner">
+    					<div class="item active">
+    						<img class="slide-image" src="{{ url_for('static', filename='images/puppy1.jpg') }}" alt="">
+    					</div>
+    					<div class="item">
+    						<img class="slide-image" src="{{ url_for('static', filename='images/lake1.jpg') }}" alt="">
+    					</div>
+    					<div class="item">
+    						<img class="slide-image" src="{{ url_for('static', filename='images/wood1.jpg') }}" alt="">
+    					</div>
+
+    				</div>
+    				<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+    					<span class="glyphicon glyphicon-chevron-left"></span>
+    				</a>
+    				<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+    					<span class="glyphicon glyphicon-chevron-right"></span>
+    				</a>
+
+    			</div><!-- end carousel slide -->
+    		</div> <!-- end col-md-12 -->
+    	</div><!-- end row carousel-holder -->
+
+
+        <div class="row">
+           {% for pup in puppy.items %}
+           <div class="col-md-6 pull-right">
+              <div class="thumbnail">
+                 <img src="{{ pup.picture }}" alt="">
+                 <div class="caption">
+
+                    <!-- <h4 class="pull-right">$24.99</h4> -->
+                    <h4><a href="{{ url_for('puppy_profile', shelter_id=pup.shelter.id,shelter_name=pup.shelter.name_slug, puppy_id=pup.id) }}">{{ pup.name }}</a>
+                    </h4>
+                    <p>{{ pup.profile.description }}{{ pup.page }}</p> <br>
+                    <a href="{{ url_for('puppy_profile', shelter_id=pup.shelter.id,shelter_name=pup.shelter.name_slug, puppy_id=pup.id) }}" class='btn btn-info'>Adopt</a>
+                </div><!-- end caption -->
+                <div class="ratings">
+                    <p class="pull-right">15 reviews</p>
+                    <p>
+                        <span class="glyphicon glyphicon-heart-empty"></span>
+                        <span class="glyphicon glyphicon-heart-empty"></span>
+                        <span class="glyphicon glyphicon-heart-empty"></span>
+                        <span class="glyphicon glyphicon-heart-empty"></span>
+                        <span class="glyphicon glyphicon-heart-empty"></span>
+                    </p>
+                </div><!-- end ratings -->
+            </div><!-- end thumbnail -->
+        </div><!-- end col-sm-4 col-lg-4 col-md-4 -->
+        {% endfor %}
+    </div> <!-- end row -->
+    
+    <div class="col-md-12 text-center">
+
+      <nav>
+       <ul class="pagination pagination-lg">
+
+        {% if puppy.has_prev %}
+        <li><a href="{{ url_for('shelter_profile', shelter_id=shelter_id, shelter_name=shelter_name, page=puppy.prev_num) }}">Previous</a></li>
+        {% else %}
+        <li><a class="btn disabled">Previous</a></li>
+        {% endif %} 
+
+        {% for page in puppy.iter_pages() %}
+
+        {% if page %}
+        {% if page != puppy.page %}
+
+        <li><a class="btn btn-default" href="{{ url_for('shelter_profile',shelter_id=shelter_id, shelter_name=shelter_name, page=page) }}">{{ page }}</a></li>
+        {% else %}
+        <li><a class="btn btn-info active" href="{{ url_for('shelter_profile',shelter_id=shelter_id, shelter_name=shelter_name, page=page) }}">{{ page }}</a></li>
+        {% endif %}
+        {% endif %}
+        
+        {% endfor %}
+        
+
+        {% if puppy.has_next %}
+        <li><a href="{{ url_for('shelter_profile', shelter_id=shelter_id, shelter_name=shelter_name, page=puppy.next_num) }}">Next</a></li>
+        {% else %}
+        <li><a class="btn disabled">Next</a></li>
+        {% endif %} 
+
+      </ul>
+    </nav>
+
+
+
+</div><!--  end col-12 -->
+</div> <!-- end col-md- -->
+</div><!-- end row -->
+	
+
+
+{% endblock %}
