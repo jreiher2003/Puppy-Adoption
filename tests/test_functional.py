@@ -1,7 +1,7 @@
 import unittest
 import datetime
 from base import BaseTestCase
-from app.models import Shelter
+from app.models import Shelter, Puppy, Profile
 
 
 class FlaskTestCase(BaseTestCase):
@@ -19,19 +19,16 @@ class FlaskTestCase(BaseTestCase):
 
     # Ensure that the shelter profile loads correctly
     def test_index_shelter_profile_page_loads(self):
-        response = self.client.get('/1/testshelter/page/1')
+        response = self.client.get('/1/testshelter/page/1', content_type='html/text')
         self.assertIn(b'Testshelter', response.data)
         self.assertIn(b'123 Fake st.', response.data)
         self.assertIn(b'Fake', response.data)
         self.assertIn(b'http://test.com', response.data)
         self.assertIn(b'Testpup', response.data)
+        self.assertEqual(response.status_code, 200)
         shelter = Shelter.query.filter_by(name='Testshelter').first()
         self.assertTrue(str(shelter) == '<name>: Testshelter')
-
-    # Ensure that puppy-profile correctly
-    def test_index_puppy_profile(self):
-        response = self.client.get('/1/testshelter/profile/1', content_type='html/text')
-        self.assertEqual(response.status_code, 200)
+        
 
     # Ensure that the login page loads correctly
     def test_index_puppy_profile_page_loads(self):
@@ -42,15 +39,15 @@ class FlaskTestCase(BaseTestCase):
         self.assertIn(b'Testbreed', response.data)
         self.assertIn(b'Testblind', response.data)
         self.assertIn(b'This is a test description', response.data)
+        puppy = Puppy.query.filter_by(name='Testpup').first()
+        self.assertTrue(str(puppy) == '<name>: Testpup')
+        profile = Profile.query.filter_by(id=puppy.id).first()
+        self.assertTrue(str(profile) == '<specialNeeds>: Testblind')
 
     # Ensure that Flask was set up correctly
     def test_index_adopt_puppy_page(self):
         response = self.client.get('/1/testshelter/profile/1/adopt/', content_type='html/text')
         self.assertEqual(response.status_code, 200)
-
-    # Ensure that the login page loads correctly
-    def test_index_adopt_puppy_page_loads(self):
-        response = self.client.get('/1/testshelter/profile/1/adopt/')
         self.assertIn(b'Who do you want to adopt <u>Testpup</u>?', response.data)
 
 
