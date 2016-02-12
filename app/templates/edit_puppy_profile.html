@@ -34,10 +34,10 @@
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-				{{ form.breed.label }}{{ form.breed(class="selectpicker pull-right",  title="Choose one of the following...") }}
+				{{ form1.breed.label }}{{ form1.breed(class="selectpicker pull-right",  title="Choose one of the following...") }}
 				</div>
 				<div class="form-group">
-				{{ form.specialNeeds.label }}{{ form.specialNeeds(class="selectpicker pull-right") }}<br>
+				{{ form1.specialNeeds.label }}{{ form1.specialNeeds(class="selectpicker pull-right") }}<br>
 				</div>
 			</div>
 		</div>
@@ -54,7 +54,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">	
-				{{ form.shelter.label }} {{ form.shelter(class="selectpicker") }}<br>
+				{{ form.shelter.label }} {{ form.shelter(class="selectpicker", value=editpuppy.shelter.id ) }}<br>
 				</div>	
 			</div>
 			<div class="col-md-6">
