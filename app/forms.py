@@ -7,15 +7,8 @@ from app import db
 from app.models import Shelter
 
 
-class CreatePuppy(Form):
+class CreateAdoptor(Form):
 	name = TextField('Name', validators=[DataRequired()])
-	gender = RadioField('Gender', choices=[('female', 'Female'), ('male', 'Male')])
-	picture = TextField('Photo-Url', validators=[DataRequired(), URL(message="Make sure to include HTTP://")])
-	weight = IntegerField('Weight')
-	specialNeeds = SelectField('Special Needs', choices=[('None','None'),('3-legged', '3-legged'), ('Blind', 'Blind'),('Deaf', 'Deaf')])
-	description = TextAreaField('Description', validators=[Length(max=500)])
-	breed = SelectField('Breed', choices=[('None','None'),('Bulldog','Bulldog'),('Boston Terrier','Boston Terrier'),('Chihuahua', 'Chihuahua'),('German Shepherd', 'German Shepherd'),("Greyhound","Greyhound"),("Labrador Retriever","Labrador Retriever"),("Maltese","Maltese"),("Schnauzer","Schnauzer"),("Pug","Pug"),("Saint Bernard","Saint Bernard"),("Shih-Tzu","Shih-Tzu"),("Siberian Husky","Siberian Husky"),("Whippet","Whippet")])
-	shelter = SelectField('Shelter', coerce=int)
 	submit = SubmitField('Create')
 
 
@@ -31,8 +24,20 @@ class CreateShelter(Form):
 	submit = SubmitField('Create')
 
 
-class CreateAdoptor(Form):
+class CreatePuppy(Form):
+	shelter = SelectField('Shelter', coerce=int)
 	name = TextField('Name', validators=[DataRequired()])
+	gender = RadioField('Gender', choices=[('female', 'Female'), ('male', 'Male')])
+	picture = TextField('Photo-Url', validators=[DataRequired(), URL(message="Make sure to include HTTP://")])
+	weight = IntegerField('Weight')
 	submit = SubmitField('Create')
+
+
+class CreateProfile(Form):
+
+	specialNeeds = SelectField('Special Needs', choices=[('None','None'),('3-legged', '3-legged'), ('Blind', 'Blind'),('Deaf', 'Deaf')])
+	description = TextAreaField('Description', validators=[Length(max=500)])
+	breed = SelectField('Breed', choices=[('None','None'),('Bulldog','Bulldog'),('Boston Terrier','Boston Terrier'),('Chihuahua', 'Chihuahua'),('German Shepherd', 'German Shepherd'),("Greyhound","Greyhound"),("Labrador Retriever","Labrador Retriever"),("Maltese","Maltese"),("Schnauzer","Schnauzer"),("Pug","Pug"),("Saint Bernard","Saint Bernard"),("Shih-Tzu","Shih-Tzu"),("Siberian Husky","Siberian Husky"),("Whippet","Whippet")])
+
 
 
