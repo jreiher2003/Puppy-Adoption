@@ -9,7 +9,7 @@
 
 
 <form method="post" action="">
-<select name="pupadopt" class="selectpicker" data-live-search="true" multiple>
+<select name="pupadopt" class="selectpicker" data-live-search="true">
 {% for ad in adoptors %}
 	<option  value="{{ ad.id }}">{{ ad.name }}</option>
 {% endfor %}
