@@ -29,7 +29,7 @@ class TestAdoptorCase(BaseTestCase):
         self.assertIn(b'<strong>Just created</strong> a new adoptor named <u>Jefftest</u>', response.data)
 
 
-    def test_adoptosr_from_index_add_new(self):
+    def test_adoptors_from_index_add_new(self):
         response = self.client.post('/', data=dict(name='Jefftest1'), follow_redirects=True)
         self.assertIn(b'<strong>Just created</strong> a new adoptor named <u>Jefftest1</u>', response.data)
 
