@@ -45,7 +45,7 @@ class TestShelterCase(BaseTestCase):
         self.assertIn(b'<strong>Update</strong>&nbsp; on <u>Testshelter</u>.', response.data)
 
 
-    def test_shelter_delete_status(self):
+    def test_shelter_delete_page(self):
         response = self.client.get('/1/testshelter/delete/', content_type='html/text')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Are you sure you want to close down <mark>Testshelter</mark>?', response.data)
