@@ -7,7 +7,7 @@ from app.models import Puppy
 
 class TestPuppyCase(BaseTestCase):
 # Ensure that /new-puppy response is correct
-    def test_new_puppy_page(self):
+    def test_puppy_page(self):
         response = self.client.get('/new-puppy', content_type='html/text')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Check a puppy in to a shelter', response.data)
@@ -26,12 +26,12 @@ class TestPuppyCase(BaseTestCase):
         self.assertEqual(puppy.profile.description, "This is a test description")
         self.assertEqual(puppy.profile.specialNeeds, "Testblind")
         
-    def test_add_new_puppy(self):
+    def test_puppy_add_new(self):
         response = self.client.post('/new-puppy', data=dict(name='Newpup', breed=None, specialNeeds=None, gender='male',picture="https://pixabay.com", shelter=1), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'<strong>Successfully</strong> Added <u>Newpup</u> to Testshelter', response.data)
         
-    def test_add_new_puppy_test_error(self):
+    def test_puppy_add_new_test_error(self):
         response = self.client.post('/new-puppy', data=dict(name=''), follow_redirects=True)
         self.assertIn(b'This field is required.', response.data)
 
