@@ -6,7 +6,7 @@ import us # pragma: no cover
 from app import app, db # pragma: no cover
  
 from flask import render_template, url_for, flash, redirect, request # pragma: no cover
-from forms import CreatePuppy, CreateShelter, CreateAdoptor # pragma: no cover
+from forms import CreatePuppy, CreateShelter, CreateAdoptor, CreateProfile # pragma: no cover
 from app.models import Shelter, Puppy, Profile, Adoptors, AdoptorsPuppies # pragma: no cover
 from app.utils import * # pragma: no cover
 
@@ -131,12 +131,13 @@ def new_puppy():
 	SHELTERS = Shelter.query.all()
 	shelterq = Shelter.query.all()
 	form = CreatePuppy()
+	form1 = CreateProfile()
 	form.shelter.choices = [(i.id,i.name) for i in shelterq]
-	if form.validate_on_submit():
+	if form.validate_on_submit() and form1.validate_on_submit:
 		newpuppy = Puppy(name=form.name.data, gender=form.gender.data, dateOfBirth=create_random_age(), picture=form.picture.data, shelter_id=form.shelter.data, weight=create_random_weight(), show=True)
 		db.session.add(newpuppy)
 		db.session.commit()
-		newprofile = Profile(breed=form.breed.data, specialNeeds=form.specialNeeds.data, description=descriptions(), puppy_id=newpuppy.id)
+		newprofile = Profile(breed=form1.breed.data, specialNeeds=form1.specialNeeds.data, description=descriptions(), puppy_id=newpuppy.id)
 		db.session.add(newprofile)
 		db.session.commit()
 		if overflow(newpuppy.shelter_id):
@@ -152,6 +153,7 @@ def new_puppy():
 			
 	return render_template('create_puppy.html', 
 							form=form,
+							form1=form1,
 							SHELTERS=SHELTERS)
 
 
@@ -160,18 +162,23 @@ def edit_puppy(shelter_id,shelter_name,puppy_id):
 	SHELTERS = Shelter.query.all()
 	shelterq = Shelter.query.all()
 	# editpuppy = Puppy.query.filter(Shelter.id==Puppy.shelter_id).one()
-	editpuppy=db.session.query(Puppy).join(Profile, Puppy.id==Profile.puppy_id).filter(Puppy.id==puppy_id).one()
+	editpuppy= Puppy.query.filter_by(id=puppy_id).one()
+	editprofile = Profile.query.filter_by(puppy_id=editpuppy.id).one()
 	form = CreatePuppy(obj=editpuppy)
+	form1 = CreateProfile(obj=editprofile)
 	form.shelter.choices = [(i.id,i.name) for i in shelterq]
 	if form.validate_on_submit():
 		editpuppy.name = form.name.data
 		editpuppy.gender = form.gender.data
 		editpuppy.picture = form.picture.data
-		editpuppy.profile.breed = form.breed.data
 		editpuppy.weight = form.weight.data
-		editpuppy.profile.specialNeeds = form.specialNeeds.data
 		editpuppy.shelter_id = form.shelter.data
+		
+
+		editprofile.breed = form1.breed.data
+		editprofile.specialNeeds = form1.specialNeeds.data
 		db.session.add(editpuppy)
+		db.session.add(editprofile)
 		if overflow(editpuppy.shelter_id):
 			db.session.commit()
 			counting_shows()
@@ -192,6 +199,7 @@ def edit_puppy(shelter_id,shelter_name,puppy_id):
 	return render_template("edit_puppy_profile.html", 
 							editpuppy=editpuppy, 
 							form=form,
+							form1=form1,
 							SHELTERS=SHELTERS)
 
 
