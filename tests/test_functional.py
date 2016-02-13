@@ -56,14 +56,18 @@ class FlaskTestCase(BaseTestCase):
         response = self.client.get('/1/testshelter/profile/2/adopt/2/', content_type='html/text')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Are you sure you want <mark>Billpup</mark> to be adopted by <mark>Billtest</mark>?', response.data)
-    
-     
-      # Ensure that list-adoptions response is correct
-    def test_index_list_adoptions(self):
-        response = self.client.get('/list-adoptions', content_type='html/text')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'List of past adoptions', response.data)
-        self.assertIn(b'Testname</span></mark>\thas adopted  <mark><span class="text-success">Testpup</span></mark> from <mark><span class="text-danger">Testshelter', response.data)
+
+    def test_index_adopt_2_puppy_post(self):
+        response = self.client.post('/1/testshelter/profile/2/adopt/2/', data=dict(puppyname='2', adoptorname='2'))
+        self.assertEqual(response.status_code, 302)
+        response1 = self.client.get('/list-adoptions', content_type='html/text')
+        self.assertEqual(response1.status_code, 200)
+        self.assertIn(b'<strong>Successful</strong> adoption', response1.data)
+        self.assertIn(b'List of past adoptions', response1.data)
+        self.assertIn(b'Billtest</span></mark>\thas adopted  <mark><span class="text-success">Billpup</span></mark> from <mark><span class="text-danger">Testshelter', response1.data)
+        self.assertIn(b'Testname</span></mark>\thas adopted  <mark><span class="text-success">Testpup</span></mark> from <mark><span class="text-danger">Testshelter', response1.data)
+
+
 
    
 
