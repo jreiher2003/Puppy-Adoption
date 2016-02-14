@@ -13,7 +13,7 @@ from app.utils import * # pragma: no cover
 
 
 
-@app.route('/', methods=["GET", "POST"])
+@app.route('/', methods=["GET", "POST"]) # pragma: no cover
 def index():
 	SHELTERS = Shelter.query.all()
 	""" front page of site that lists all shelters"""
@@ -35,7 +35,7 @@ def index():
 
 
 ##  CRUD for Shelter class  ##
-@app.route('/<int:shelter_id>/<path:shelter_name>/page/<int:page>')
+@app.route('/<int:shelter_id>/<path:shelter_name>/page/<int:page>') # pragma: no cover
 def shelter_profile(shelter_id,shelter_name, page=1):
 	SHELTERS = Shelter.query.all()
 	PUPPY = Puppy.query.filter(Puppy.shelter_id==shelter_id).all()
@@ -50,7 +50,7 @@ def shelter_profile(shelter_id,shelter_name, page=1):
 						    PUPPY=PUPPY)
 
 
-@app.route('/new-shelter', methods=['GET', 'POST'])
+@app.route('/new-shelter', methods=['GET', 'POST']) # pragma: no cover
 def new_shelter():
 	SHELTERS = Shelter.query.all()
 	error = None
@@ -76,7 +76,7 @@ def new_shelter():
 							SHELTERS=SHELTERS)
 
 
-@app.route('/<int:shelter_id>/<path:shelter_name>/edit/', methods=['GET','POST'])
+@app.route('/<int:shelter_id>/<path:shelter_name>/edit/', methods=['GET','POST']) # pragma: no cover
 def edit_shelter(shelter_id,shelter_name):
 	SHELTERS = Shelter.query.all()
 	editshelter = Shelter.query.filter_by(id=shelter_id).one()
@@ -101,7 +101,7 @@ def edit_shelter(shelter_id,shelter_name):
 							SHELTERS=SHELTERS)
 
 
-@app.route('/<int:shelter_id>/<path:shelter_name>/delete/', methods=['GET', 'POST'])
+@app.route('/<int:shelter_id>/<path:shelter_name>/delete/', methods=['GET', 'POST']) # pragma: no cover
 def delete_shelter(shelter_id, shelter_name):
 	SHELTERS = Shelter.query.all()
 	deleteshelter = Shelter.query.filter_by(id=shelter_id).one()
@@ -116,7 +116,7 @@ def delete_shelter(shelter_id, shelter_name):
 
 
 ###  CRUD for Puppy  ######
-@app.route('/<int:shelter_id>/<path:shelter_name>/profile/<int:puppy_id>')
+@app.route('/<int:shelter_id>/<path:shelter_name>/profile/<int:puppy_id>') # pragma: no cover
 def puppy_profile(shelter_id,shelter_name,puppy_id):
 	SHELTERS = Shelter.query.all()
 	puppy = Puppy.query.filter_by(id=puppy_id).one()
@@ -126,7 +126,7 @@ def puppy_profile(shelter_id,shelter_name,puppy_id):
 
 
 ## create 
-@app.route('/new-puppy', methods=['GET', 'POST'])
+@app.route('/new-puppy', methods=['GET', 'POST']) # pragma: no cover
 def new_puppy():
 	SHELTERS = Shelter.query.all()
 	shelterq = Shelter.query.all()
@@ -157,7 +157,7 @@ def new_puppy():
 							SHELTERS=SHELTERS)
 
 
-@app.route('/<int:shelter_id>/<path:shelter_name>/profile/<int:puppy_id>/edit/', methods=['GET','POST'])
+@app.route('/<int:shelter_id>/<path:shelter_name>/profile/<int:puppy_id>/edit/', methods=['GET','POST']) # pragma: no cover
 def edit_puppy(shelter_id,shelter_name,puppy_id):
 	SHELTERS = Shelter.query.all()
 	shelterq = Shelter.query.all()
@@ -203,7 +203,7 @@ def edit_puppy(shelter_id,shelter_name,puppy_id):
 							SHELTERS=SHELTERS)
 
 
-@app.route('/<int:shelter_id>/<path:shelter_name>/profile/<int:puppy_id>/delete/', methods=['GET','POST'])
+@app.route('/<int:shelter_id>/<path:shelter_name>/profile/<int:puppy_id>/delete/', methods=['GET','POST']) # pragma: no cover
 def delete_puppy(shelter_id, shelter_name, puppy_id):
 	SHELTERS = Shelter.query.all()
 	deletepuppy = Puppy.query.join(Profile, Puppy.id==Profile.puppy_id).filter(Puppy.id==puppy_id).one()
@@ -219,7 +219,7 @@ def delete_puppy(shelter_id, shelter_name, puppy_id):
 
 	
 # CRUD adoptor ######################
-@app.route('/adoptors', methods=['GET', 'POST'])
+@app.route('/adoptors', methods=['GET', 'POST']) # pragma: no cover
 def adoptor_list():
 	SHELTERS = Shelter.query.all()
 	adoptors = Adoptors.query.order_by(Adoptors.id.desc()).all()
@@ -228,7 +228,7 @@ def adoptor_list():
 							SHELTERS=SHELTERS)
 
 
-@app.route('/new-adoptor', methods=['GET', 'POST'])
+@app.route('/new-adoptor', methods=['GET', 'POST']) # pragma: no cover
 def new_adoptor():
 	SHELTERS = Shelter.query.all()
 	error = None
@@ -245,7 +245,7 @@ def new_adoptor():
 							SHELTERS=SHELTERS)
 
 
-@app.route('/adoptors/profile/<int:adoptor_id>/edit/', methods=['GET','POST'])
+@app.route('/adoptors/profile/<int:adoptor_id>/edit/', methods=['GET','POST']) # pragma: no cover
 def edit_adoptor(adoptor_id):
 	SHELTERS = Shelter.query.all()
 	editadoptor = Adoptors.query.filter_by(id=adoptor_id).one()
@@ -262,7 +262,7 @@ def edit_adoptor(adoptor_id):
 							SHELTERS=SHELTERS)
 
 
-@app.route('/adoptors/profile/<int:adoptor_id>/delete/', methods=['GET','POST'])
+@app.route('/adoptors/profile/<int:adoptor_id>/delete/', methods=['GET','POST']) # pragma: no cover
 def delete_adoptor(adoptor_id):
 	SHELTERS = Shelter.query.all()
 	deleteadoptor = Adoptors.query.filter_by(id=adoptor_id).one()
@@ -277,7 +277,7 @@ def delete_adoptor(adoptor_id):
 
 
 ### CRUD for adopting a puppy
-@app.route('/<int:shelter_id>/<path:shelter_name>/profile/<int:puppy_id>/adopt/', methods=['GET','POST'])
+@app.route('/<int:shelter_id>/<path:shelter_name>/profile/<int:puppy_id>/adopt/', methods=['GET','POST']) # pragma: no cover
 def adoptions(shelter_id,shelter_name,puppy_id):
 	SHELTERS = Shelter.query.all()
 	puppy = Puppy.query.filter_by(id=puppy_id).one()
@@ -294,7 +294,7 @@ def adoptions(shelter_id,shelter_name,puppy_id):
 							adoptors=adoptors)
 
 
-@app.route('/<int:shelter_id>/<path:shelter_name>/profile/<int:puppy_id>/adopt/<int:adoptor_id>/', methods=['GET','POST'])
+@app.route('/<int:shelter_id>/<path:shelter_name>/profile/<int:puppy_id>/adopt/<int:adoptor_id>/', methods=['GET','POST']) # pragma: no cover
 def adoption_success(shelter_id,shelter_name,puppy_id,adoptor_id):
 	SHELTERS = Shelter.query.all()
 	puppy = Puppy.query.filter_by(id=puppy_id).one()
@@ -314,7 +314,7 @@ def adoption_success(shelter_id,shelter_name,puppy_id,adoptor_id):
 							SHELTERS=SHELTERS)
 
 
-@app.route('/list-adoptions', methods=['GET', 'POST'])
+@app.route('/list-adoptions', methods=['GET', 'POST']) # pragma: no cover
 def list_adoptions():
 	SHELTERS = Shelter.query.all()
 	adoptions = AdoptorsPuppies.query.order_by(AdoptorsPuppies.adopt_date.desc()).all()

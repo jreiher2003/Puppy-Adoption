@@ -1,10 +1,9 @@
-import unittest
+import unittest 
 import datetime
-from base import BaseTestCase
-from app.models import Shelter, Puppy, Profile
 
+from base import BaseTestCase 
+from app.models import Shelter, Puppy, Profile, Adoptors
 
-class FlaskTestCase(BaseTestCase):
 
     # Ensure that Flask was set up correctly
     def test_index(self):
@@ -46,16 +45,18 @@ class FlaskTestCase(BaseTestCase):
 
     # Ensure that Flask was set up correctly
     def test_index_adopt_puppy_page(self):
-        response = self.client.get('/1/testshelter/profile/1/adopt/', content_type='html/text')
+        response = self.client.get('/1/testshelter/profile/2/adopt/', content_type='html/text')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Who do you want to adopt <u>Testpup</u>?', response.data)
+        self.assertIn(b'Who do you want to adopt <u>Billpup</u>?', response.data)
 
 
-    # Ensure that test adpot page 2 set up correctly
-    def test_index_adopt_2_puppy_page(self):
-        response = self.client.get('/1/testshelter/profile/2/adopt/2/', content_type='html/text')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Are you sure you want <mark>Billpup</mark> to be adopted by <mark>Billtest</mark>?', response.data)
+    def test_index_adopt_puppy_post(self):
+        response = self.client.post('/1/testshelter/profile/2/adopt/', data=dict(pupadopt=2))
+        self.assertEqual(response.status_code, 302)
+        response1 = self.client.get('/1/testshelter/profile/2/adopt/2/', content_type='html/text')
+        self.assertEqual(response1.status_code, 200)
+        self.assertIn(b'Are you sure you want <mark>Billpup</mark> to be adopted by <mark>Billtest</mark>?', response1.data)
+
 
     def test_index_adopt_2_puppy_post(self):
         response = self.client.post('/1/testshelter/profile/2/adopt/2/', data=dict(puppyname='2', adoptorname='2'))
