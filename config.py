@@ -6,6 +6,11 @@ class BaseConfig(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SECRET_KEY = 'sM\xe4\xfcF\xbf>9\x93\xdf\xfa\x98'
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=465,
+    MAIL_USE_SSL=True,
+    MAIL_USERNAME = os.environ['MAIL_USERNAME']
+    MAIL_PASSWORD = os.environ['MAIL_PASSWORD']
     # print SQLALCHEMY_DATABASE_URI
    
 
