@@ -5,14 +5,11 @@ from base import BaseTestCase
 from app.models import Shelter, Puppy, Profile, Adoptors
 
 
-    # Ensure that Flask was set up correctly
-    def test_index(self):
-        response = self.client.get('/', content_type='html/text')
-        self.assertEqual(response.status_code, 200)
-
+class TestFunctionalCase(BaseTestCase):
     # Ensure that the login page loads correctly
     def test_index_page_loads(self):
-        response = self.client.get('/')
+        response = self.client.get('/', content_type='html/text')
+        self.assertEqual(response.status_code, 200)
         self.assertIn(b'Welcome to our puppy adoption web app!', response.data)
         self.assertIn(b'Testshelter', response.data)
 
