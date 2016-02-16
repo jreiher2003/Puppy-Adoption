@@ -110,8 +110,6 @@ class AdoptorsPuppies(db.Model):
     adopt_date = db.Column(db.Date, default=datetime.datetime.now())
     puppies = db.relationship(Puppy)
     adoptors = db.relationship(Adoptors)
-    # puppy = db.relationship("Puppy", back_populates="adoptors_puppies")
-
 
 
     def __init__(self, adoptor_id,puppy_id):
