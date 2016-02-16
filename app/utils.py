@@ -1,7 +1,8 @@
 from random import randint # pragma: no cover
 import datetime # pragma: no cover
 import random # pragma: no cover
-from app import app, db # pragma: no cover
+from app import app, db, mail # pragma: no cover
+from flask_mail import Message
 from app.models import Shelter, Puppy, Profile # pragma: no cover
 
 
@@ -77,3 +78,10 @@ def overflow(shelter_id):
 		return True
 	else:
 		return False
+
+
+def send_email(subject, sender, recipients, text_body, html_body):
+    msg = Message(subject, sender=sender, recipients=recipients)
+    msg.body = text_body
+    msg.html = html_body
+    mail.send(msg)

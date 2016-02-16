@@ -323,3 +323,10 @@ def list_adoptions():
 	return render_template('list_adoptions.html', 
 							adoptions=adoptions,
 							SHELTERS=SHELTERS)
+
+
+
+@app.route("/send")
+def send_mails():
+	send_email("Jeff is now cool with you", "tech@computerjeff.com", ["jreiher2003@yahoo.com"], render_template('email.txt'), render_template('email.html'))
+	return "Sent"
