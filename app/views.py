@@ -308,6 +308,7 @@ def adoption_success(shelter_id,shelter_name,puppy_id,adoptor_id):
 		db.session.add(puppy)
 		db.session.commit()
 		counting_shows()
+		send_email("You just adopted " + puppy.name, "me@jeffreiher.com", ["jreiher2003@yahoo.com"], render_template('email.txt', puppy=puppy, adoptor=adoptor), render_template('email.html', puppy=puppy, adoptor=adoptor))
 		flash('<strong>Successful</strong> adoption', 'success')
 		return redirect(url_for('list_adoptions'))
 	return render_template('adoption_success.html', 

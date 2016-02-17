@@ -1,7 +1,10 @@
 
-	Hello Winner
+Hello {{ adoptor.name }}
 
-	You have been selected a the #1 winner of the world
-	Here is your winnings 1,000,000,000,000,000,000
-	
-	Call this number to recieve your prize
+Congratulations on adopting {{ puppy.name }} from {{ puppy.shelter.name }}
+<img src="{{ puppy.picture }}" alt="{{ puppy.name }}">
+<p>I hope this little guy makes you and your family happy</p>
+
+Yours Truely, 
+
+Jeffrey
