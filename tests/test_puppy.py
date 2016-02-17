@@ -27,7 +27,7 @@ class TestPuppyCase(BaseTestCase):
         self.assertEqual(puppy.profile.specialNeeds, "Testblind")
         
     def test_puppy_add_new(self):
-        response = self.client.post('/new-puppy', data=dict(name='Newpup', breed=None, specialNeeds=None, gender='male',picture="https://pixabay.com", shelter=1), follow_redirects=True)
+        response = self.client.post('/new-puppy', data=dict(name='Newpup', breed=None, specialNeeds=None, gender='male',picture="https://pixabay.com", shelter=1, description="This is a new pup", weight=20), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'<strong>Successfully</strong> Added <u>Newpup</u> to Testshelter', response.data)
         
