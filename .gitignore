@@ -1,10 +1,10 @@
-
 *.pyc
 *.db
 venv/
 *.bat
 coverage/
 *.ini
+secret_key.py
 
 
 

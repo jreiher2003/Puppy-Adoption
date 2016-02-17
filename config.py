@@ -1,10 +1,11 @@
 import os
+import secret_key
 
 # default config
 class BaseConfig(object):
     DEBUG = False
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SECRET_KEY = 'sM\xe4\xfcF\xbf>9\x93\xdf\xfa\x98'
+    SECRET_KEY = secret_key.secret_key
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     MAIL_SERVER='smtp.gmail.com'
     MAIL_PORT=465
