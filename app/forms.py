@@ -29,7 +29,7 @@ class CreatePuppy(Form):
 	name = TextField('Name', validators=[DataRequired()])
 	gender = RadioField('Gender', choices=[('female', 'Female'), ('male', 'Male')])
 	picture = TextField('Photo-Url', validators=[DataRequired(), URL(message="Make sure to include HTTP://")])
-	weight = IntegerField('Weight')
+	weight = IntegerField('Weight', validators=[NumberRange(min=1, max=75)])
 	submit = SubmitField('Create')
 
 

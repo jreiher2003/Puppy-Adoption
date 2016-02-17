@@ -163,7 +163,6 @@ def new_puppy():
 def edit_puppy(shelter_id,shelter_name,puppy_id):
 	SHELTERS = Shelter.query.all()
 	shelterq = Shelter.query.all()
-	# editpuppy = Puppy.query.filter(Shelter.id==Puppy.shelter_id).one()
 	editpuppy= Puppy.query.filter_by(id=puppy_id).one()
 	editprofile = Profile.query.filter_by(puppy_id=editpuppy.id).one()
 	form = CreatePuppy(obj=editpuppy)
@@ -175,10 +174,11 @@ def edit_puppy(shelter_id,shelter_name,puppy_id):
 		editpuppy.picture = form.picture.data
 		editpuppy.weight = form.weight.data
 		editpuppy.shelter_id = form.shelter.data
+		editpuppy.weight = form.weight.data
 		
-
 		editprofile.breed = form1.breed.data
 		editprofile.specialNeeds = form1.specialNeeds.data
+		editprofile.description = form1.description.data 
 		db.session.add(editpuppy)
 		db.session.add(editprofile)
 		if overflow(editpuppy.shelter_id):

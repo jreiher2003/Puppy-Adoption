@@ -52,12 +52,35 @@
 		</span>
 		</div>
 		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+				{{ form1.description.label }}<br>{{ form1.description(class="form-control") }}
+				<span class="error bg-danger">
+					{% if form1.description.errors %}
+					{% for error in form1.description.errors %}
+					<div class="bg-danger">{{ error }}</div>
+					{% endfor %}
+					{% endif %}
+				</span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">	
-				{{ form.shelter.label }} {{ form.shelter(class="selectpicker", value=editpuppy.shelter.id ) }}<br>
+				{{ form.shelter.label }}<br> {{ form.shelter(class="selectpicker", value=editpuppy.shelter.id ) }}<br>
 				</div>	
 			</div>
 			<div class="col-md-6">
+				<div class="form-group">
+					{{ form.weight.label }}<br> {{ form.weight(class="form-control", type="number", min="1",max="75") }}
+					<span class="error bg-danger">
+					{% if form.weight.errors %}
+					{% for error in form.weight.errors %}
+					<div class="bg-danger">{{ error }}</div>
+					{% endfor %}
+					{% endif %}
+				</span>
 			</div>
 		</div>
 		<div class="form-group">
