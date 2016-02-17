@@ -1,5 +1,5 @@
 import os
-import secret_key
+
 
 # default config
 class BaseConfig(object):
