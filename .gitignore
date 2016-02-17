@@ -3,4 +3,3 @@
 venv/
 *.bat
 coverage/
-alembic.ini
