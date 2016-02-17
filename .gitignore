@@ -1,9 +1,11 @@
+
 *.pyc
 *.db
 venv/
 *.bat
 coverage/
 *.ini
+
 
 
 
