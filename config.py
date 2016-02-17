@@ -5,7 +5,7 @@ import secret_key
 class BaseConfig(object):
     DEBUG = False
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SECRET_KEY = secret_key.secret_key
+    SECRET_KEY = os.environ['SECRET_KEY']
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     MAIL_SERVER='smtp.gmail.com'
     MAIL_PORT=465
@@ -18,6 +18,7 @@ class BaseConfig(object):
 class TestConfig(BaseConfig):
     DEBUG = True
     TESTING = True
+    MAIL_SUPPRESS_SEND = False
     WTF_CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
     # print SQLALCHEMY_DATABASE_URI
