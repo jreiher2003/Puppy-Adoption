@@ -65,6 +65,15 @@ class TestFunctionalCase(BaseTestCase):
         self.assertIn(b'Billtest</span></mark>\thas adopted  <mark><span class="text-success">Billpup</span></mark> from <mark><span class="text-danger">Testshelter', response1.data)
         self.assertIn(b'Testname</span></mark>\thas adopted  <mark><span class="text-success">Testpup</span></mark> from <mark><span class="text-danger">Testshelter', response1.data)
 
+    # def test_mail_send(self):
+    #     with mail.record_messages() as outbox:
+
+    #         mail.send_message(subject='testing',
+    #           body='test',
+    #           recipients=emails)
+
+    #         assert len(outbox) == 1
+    #         assert outbox[0].subject == "testing"
 
 
    
