@@ -38,5 +38,5 @@ def cov():
     cov.erase()
 
 if __name__ == '__main__':
-    logging.basicConfig(filename='adopt_log.log', filemode='w' ,level=logging.DEBUG)
+    # logging.basicConfig(filename='adopt_log.log', filemode='w' ,level=logging.DEBUG)
     manager.run()
