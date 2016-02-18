@@ -8,6 +8,7 @@ from app import app, db, mail # pragma: no cover
  
 from flask import render_template, url_for, flash, redirect, request # pragma: no cover
 from flask_mail import Message # pragma: no cover
+
 from forms import CreatePuppy, CreateShelter, CreateAdoptor, CreateProfile # pragma: no cover
 from app.models import Shelter, Puppy, Profile, Adoptors, AdoptorsPuppies # pragma: no cover
 from app.utils import * # pragma: no cover
@@ -57,7 +58,6 @@ def new_shelter():
 	SHELTERS = Shelter.query.all()
 	error = None
 	form = CreateShelter()
-	# form.state.choices = [(i.name,i.name) for i in us.states.STATES]
 	if form.validate_on_submit():
 		newshelter = Shelter(name=form.name.data, 
 							 address=form.address.data,
@@ -308,7 +308,8 @@ def adoption_success(shelter_id,shelter_name,puppy_id,adoptor_id):
 		db.session.add(puppy)
 		db.session.commit()
 		counting_shows()
-		send_email("You just adopted " + puppy.name, "me@jeffreiher.com", ["jreiher2003@yahoo.com"], render_template('email.txt', puppy=puppy, adoptor=adoptor), render_template('email.html', puppy=puppy, adoptor=adoptor))
+		message = twilio_cred().sms.messages.create(to="+19415853084", from_="+19414515401", body=adoptor.name +" just adopted " + puppy.name + " from " + puppy.shelter.name + ".  Congrats!" )
+		send_email(adoptor.name + " just adopted " + puppy.name, "me@jeffreiher.com", ["jreiher2003@yahoo.com"], render_template('email.txt', puppy=puppy, adoptor=adoptor), render_template('email.html', puppy=puppy, adoptor=adoptor))
 		flash('<strong>Successful</strong> adoption', 'success')
 		return redirect(url_for('list_adoptions'))
 	return render_template('adoption_success.html', 
@@ -327,7 +328,7 @@ def list_adoptions():
 
 
 
-# @app.route("/send")
-# def send_mails():
-# 	send_email("Jeff is now cool with you", "tech@computerjeff.com", ["jreiher2003@yahoo.com"], render_template('email.txt'), render_template('email.html'))
-# 	return "Sent"
+@app.route('/sms')
+def send_sms():
+	message = twilio_cred().sms.messages.create(to="+19415853084", from_="+19414515401", body="yo mama? test send")
+	return message.sid
