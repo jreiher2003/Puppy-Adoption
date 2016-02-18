@@ -93,10 +93,12 @@ class Adoptors(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250))
+    email = db.Column(db.String(120))
     adoptor_puppies = db.relationship('AdoptorsPuppies', cascade="save-update, merge, delete")
 
-    def __init__(self,name):
+    def __init__(self,name, email):
         self.name = name
+        self.email = email
 
     def __repr__(self):
         return '<name>: {}'.format(self.name)
