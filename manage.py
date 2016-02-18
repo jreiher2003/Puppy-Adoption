@@ -6,6 +6,7 @@ from app import app,db
 
 from flask.ext.script import Manager 
 from flask.ext.migrate import Migrate, MigrateCommand 
+import logging
 
 
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -37,4 +38,5 @@ def cov():
     cov.erase()
 
 if __name__ == '__main__':
+    logging.basicConfig(filename='adopt_log.log', filemode='w' ,level=logging.DEBUG)
     manager.run()

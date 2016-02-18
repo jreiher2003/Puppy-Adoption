@@ -1,4 +1,5 @@
 from random import randint # pragma: no cover
+import logging
 import datetime # pragma: no cover
 import random # pragma: no cover
 import us # pragma: no cover
@@ -239,6 +240,7 @@ def new_adoptor():
 		newadoptor = Adoptors(name=form.name.data)
 		db.session.add(newadoptor)
 		db.session.commit()
+		logging.debug('A new adoptor was created named %s', newadoptor.name)
 		flash('<strong>Just created</strong> a new adoptor named <u>%s</u>' % newadoptor.name, 'info')
 		return redirect(url_for('adoptor_list'))
 	return render_template('create_adoptor.html', 
@@ -256,6 +258,7 @@ def edit_adoptor(adoptor_id):
 		editadoptor.name = form.name.data
 		db.session.add(editadoptor)
 		db.session.commit()
+		logging.debug('A new adoptor was edited named %s', editadoptor.name)
 		flash('<strong>Successful</strong> edit of this adoptor who is now named <u>%s</u>' % editadoptor.name, 'info')
 		return redirect(url_for('adoptor_list'))
 	return render_template('edit_adoptor.html', 
@@ -271,6 +274,7 @@ def delete_adoptor(adoptor_id):
 	if request.method == 'POST':
 		db.session.delete(deleteadoptor)
 		db.session.commit()
+		logging.debug('An adoptor was deleted named %s', deleteadoptor.name)
 		flash('<strong>You just</strong> deleted <u>%s</u>' % deleteadoptor.name, 'danger')
 		return redirect(url_for('adoptor_list'))
 	return render_template('delete_adoptor.html', 
