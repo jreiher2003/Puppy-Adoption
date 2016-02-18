@@ -15,13 +15,13 @@ def count_pups():
 		db.session.add(shel)
 		db.session.commit()
 
-adoptor1 = Adoptors(name="Jeff")
+adoptor1 = Adoptors(name="Jeff", email='jreiher2003@yahoo.com')
 db.session.add(adoptor1)
-adopter2 = Adoptors(name="Mark")
+adopter2 = Adoptors(name="Mark", email='jreiher2003@yahoo.com')
 db.session.add(adopter2)
-adopter3 = Adoptors(name="Peter")
+adopter3 = Adoptors(name="Peter", email='jreiher2003@yahoo.com')
 db.session.add(adopter3)
-adopter4 = Adoptors(name="Tom")
+adopter4 = Adoptors(name="Tom", email='jreiher2003@yahoo.com')
 db.session.add(adopter4)
 db.session.commit()
 
