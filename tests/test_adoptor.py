@@ -21,20 +21,20 @@ class TestAdoptorCase(BaseTestCase):
         self.assertIn(b'Become an Adoptor', response.data)
     
     def test_adoptors_add_new(self):
-        response = self.client.post('/new-adoptor', data=dict(name='Jefftest'), follow_redirects=True)
+        response = self.client.post('/new-adoptor', data=dict(name='Jefftest',email='jreiher2003@yahoo.com'), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'<strong>Just created</strong> a new adoptor named <u>Jefftest</u>', response.data)
 
     def test_adoptors_add_new_test_error(self):
-        response = self.client.post('/new-adoptor', data=dict(name=''), follow_redirects=True)
+        response = self.client.post('/new-adoptor', data=dict(name='',email=""), follow_redirects=True)
         self.assertIn(b'This field is required.', response.data)
 
     def test_adoptors_from_index_add_new(self):
-        response = self.client.post('/', data=dict(name='Jefftest1'), follow_redirects=True)
+        response = self.client.post('/', data=dict(name='Jefftest1',email='jreiher2003@yahoo.com'), follow_redirects=True)
         self.assertIn(b'<strong>Just created</strong> a new adoptor named <u>Jefftest1</u>', response.data)
 
     def test_adoptors_from_index_add_new_test_error(self):
-        response = self.client.post('/', data=dict(name=''), follow_redirects=True)
+        response = self.client.post('/', data=dict(name='',email=""), follow_redirects=True)
         self.assertIn(b'This field is required.', response.data)
 
     def test_adoptors_delete_status(self):
@@ -53,6 +53,6 @@ class TestAdoptorCase(BaseTestCase):
         self.assertIn(b'Edit an Adoptor', response.data)
 
     def test_adoptors_edit_post(self):
-        response = self.client.post('/adoptors/profile/1/edit/', data=dict(name='Editname'), follow_redirects=True)
+        response = self.client.post('/adoptors/profile/1/edit/', data=dict(name='Editname',email='jreiher2003@yahoo.com'), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'<strong>Successful</strong> edit of this adoptor who is now named <u>Editname</u>', response.data)

@@ -13,8 +13,8 @@ class BaseTestCase(TestCase):
 
     def setUp(self):
         db.create_all()
-        db.session.add(Adoptors(name='Testname'))
-        db.session.add(Adoptors(name='Billtest'))
+        db.session.add(Adoptors(name='Testname',email='jreiher2003@yahoo.com'))
+        db.session.add(Adoptors(name='Billtest',email='jreiher2003@yahoo.com'))
         db.session.add(Shelter(name="Testshelter", address="123 Fake st.", city="Fake", state="Florida", zipCode="12345", website="http://test.com", maximum_capacity=10, current_capacity=5))
         db.session.add(Puppy(name="Testpup", shelter_id=1, gender="male", dateOfBirth=datetime.datetime.now(),picture="http://testpup.com",weight=1, show=True))
         db.session.add(Profile(puppy_id=1, breed="Testbreed",description="This is a test description", specialNeeds="Testblind"))
