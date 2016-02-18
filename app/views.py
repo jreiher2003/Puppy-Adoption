@@ -25,9 +25,10 @@ def index():
 	error = None
 	form = CreateAdoptor()
 	if form.validate_on_submit():
-		newadoptor = Adoptors(name=form.name.data)
+		newadoptor = Adoptors(name=form.name.data,email=form.email.data)
 		db.session.add(newadoptor)
 		db.session.commit()
+		logging.info('Just created %s-%s', newadoptor.name,newadoptor.email)
 		flash('<strong>Just created</strong> a new adoptor named <u>%s</u>.<br>\
 			Go Checkout the shelter pages to adopt a puppy!' % newadoptor.name, 'info')
 		return redirect(url_for('adoptor_list'))
@@ -237,10 +238,10 @@ def new_adoptor():
 	error = None
 	form = CreateAdoptor()
 	if form.validate_on_submit():
-		newadoptor = Adoptors(name=form.name.data)
+		newadoptor = Adoptors(name=form.name.data, email=form.email.data)
 		db.session.add(newadoptor)
 		db.session.commit()
-		logging.debug('A new adoptor was created named %s', newadoptor.name)
+		logging.debug('A new adoptor was created named %s-%s', newadoptor.name, newadoptor.email)
 		flash('<strong>Just created</strong> a new adoptor named <u>%s</u>' % newadoptor.name, 'info')
 		return redirect(url_for('adoptor_list'))
 	return render_template('create_adoptor.html', 
@@ -256,6 +257,7 @@ def edit_adoptor(adoptor_id):
 	form = CreateAdoptor(obj=editadoptor)
 	if form.validate_on_submit():
 		editadoptor.name = form.name.data
+		editadoptor.email = form.email.data
 		db.session.add(editadoptor)
 		db.session.commit()
 		logging.debug('A new adoptor was edited named %s', editadoptor.name)
