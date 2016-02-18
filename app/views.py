@@ -28,7 +28,7 @@ def index():
 		newadoptor = Adoptors(name=form.name.data,email=form.email.data)
 		db.session.add(newadoptor)
 		db.session.commit()
-		logging.info('Just created %s-%s', newadoptor.name,newadoptor.email)
+		logging.debug('Just created %s-%s', newadoptor.name,newadoptor.email)
 		flash('<strong>Just created</strong> a new adoptor named <u>%s</u>.<br>\
 			Go Checkout the shelter pages to adopt a puppy!' % newadoptor.name, 'info')
 		return redirect(url_for('adoptor_list'))
@@ -314,7 +314,7 @@ def adoption_success(shelter_id,shelter_name,puppy_id,adoptor_id):
 		db.session.add(puppy)
 		db.session.commit()
 		counting_shows()
-		message = twilio_cred().sms.messages.create(to="+19415853084", from_="+19414515401", body=adoptor.name +" just adopted " + puppy.name + " from " + puppy.shelter.name + ".  Congrats!" )
+		message = twilio_cred().sms.messages.create(to="+19415853084", from_="+19414515401", body=adoptor.name +" just adopted " + puppy.name + " from " + puppy.shelter.name + ".  Congrats!", media_url=[puppy.picture] )
 		send_email(adoptor.name + " just adopted " + puppy.name, "me@jeffreiher.com", ["jreiher2003@yahoo.com"], render_template('email.txt', puppy=puppy, adoptor=adoptor), render_template('email.html', puppy=puppy, adoptor=adoptor))
 		flash('<strong>Successful</strong> adoption', 'success')
 		return redirect(url_for('list_adoptions'))
