@@ -3,25 +3,35 @@
 {% block title %}AdoptMe.com{% endblock %}
 
 {% block content %}
-<header class="jumbotron hero-spacer">
+<header class="jumbotron hero-spacer text-center">
 	<h1>Welcome to our puppy adoption web app!</h1>
 	<p>Please add yourself to the adoption list here.</p>
 
 
 	<form method="post" action="">
 		{{ form.csrf_token }}
-		<div class="col-md-10 input-group input-group-lg">
-			{{ form.name(placeholder="Name...", class="form-control") }}
-			<span class="input-group-btn">{{ form.submit(value="Become an Adoptor", class="btn btn-info") }}<span>
-			</div>
+		<div class="col-md-8 col-md-offset-2 input-group input-group-lg form-group">
+			{{ form.name(placeholder="Add your name here...", class="form-control") }}
 			<span class="error bg-danger">
 				{% if form.name.errors %}
 				{% for error in form.name.errors %}
-				<div class="bg-danger">{{ error }}</div>
+				<div class="bg-danger">{{ error }}
+				</div>
 				{% endfor %}
 				{% endif %}
 			</span>
-		</form>
+			{{ form.email(placeholder="And an email...", class="form-control") }}
+			<span class="error bg-danger">
+				{% if form.email.errors %}
+				{% for error in form.email.errors %}
+				<div class="bg-danger">{{ error }}
+				</div>
+				{% endfor %}
+				{% endif %}
+			</span>
+			{{ form.submit(value="Become an Adoptor", class="form-control btn btn-info") }}
+		</div>
+	</form>
 </header>
 <hr>
 <div class="row">
