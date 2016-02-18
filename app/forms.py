@@ -1,6 +1,7 @@
 from flask_wtf import Form 
 from wtforms import TextField, RadioField, BooleanField, TextAreaField, SelectField, IntegerField, SubmitField, SelectMultipleField, StringField
-from wtforms.validators import DataRequired, Length, URL, NumberRange, Regexp
+from wtforms.validators import DataRequired, Length, URL, NumberRange, Regexp, Email
+from wtforms.fields.html5 import EmailField
 import us
 import re
 from app import db
@@ -9,6 +10,7 @@ from app.models import Shelter
 
 class CreateAdoptor(Form):
 	name = TextField('Name', validators=[DataRequired()])
+	email = EmailField('Email address', validators=[DataRequired(), Email()])
 	submit = SubmitField('Create')
 
 
