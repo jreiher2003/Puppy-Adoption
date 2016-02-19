@@ -308,7 +308,6 @@ def adoption_success(shelter_id,shelter_name,puppy_id,adoptor_id):
 		db.session.add(puppy)
 		db.session.commit()
 		counting_shows()
-		message = twilio_cred().sms.messages.create(to="+19415853084", from_="+19414515401", body=adoptor.name +" just adopted " + puppy.name + " from " + puppy.shelter.name + ".  Congrats!", media_url=[puppy.picture] )
 		send_email(adoptor.name + " just adopted " + puppy.name, "me@jeffreiher.com", ["jreiher2003@yahoo.com"], render_template('email.txt', puppy=puppy, adoptor=adoptor), render_template('email.html', puppy=puppy, adoptor=adoptor))
 		flash('<strong>Successful</strong> adoption', 'success')
 		return redirect(url_for('list_adoptions'))
@@ -327,8 +326,3 @@ def list_adoptions():
 							SHELTERS=SHELTERS)
 
 
-
-@app.route('/sms')
-def send_sms():
-	message = twilio_cred().sms.messages.create(to="+19415853084", from_="+19414515401", body="yo mama? test send")
-	return message.sid

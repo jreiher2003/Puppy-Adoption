@@ -12,8 +12,7 @@ class BaseConfig(object):
     MAIL_USE_SSL=True
     MAIL_USERNAME = os.environ['MAIL_USERNAME']
     MAIL_PASSWORD = os.environ['MAIL_PASSWORD']
-    ACCOUNT_SID = os.environ['ACCOUNT_SID']
-    AUTH_TOKEN = os.environ['AUTH_TOKEN']
+    
     # print SQLALCHEMY_DATABASE_URI
    
 

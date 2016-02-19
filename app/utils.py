@@ -3,7 +3,6 @@ import datetime # pragma: no cover
 import random # pragma: no cover
 from app import app, db, mail # pragma: no cover
 from flask_mail import Message # pragma: no cover
-from twilio.rest import TwilioRestClient # pragma: no cover
 from app.models import Shelter, Puppy, Profile # pragma: no cover
 
 
@@ -82,9 +81,3 @@ def send_email(subject, sender, recipients, text_body, html_body):
     msg.html = html_body
     mail.send(msg)
 
-def twilio_cred():
-	client = TwilioRestClient(
-		app.config['ACCOUNT_SID'], 
-		app.config['AUTH_TOKEN']
-		)
-	return client
