@@ -13,8 +13,6 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-	
-
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -34,7 +32,6 @@
 						{% for shelter in SHELTERS %}
 					    <li><a href="{{ url_for('shelter_profile', shelter_id=shelter.id,shelter_name=shelter.name_slug, page=1) }}">{{ shelter.name }}</a></li>
 					    {% endfor %}
-					    
   					</ul>
   				</li>
 				<li><a href="{{ url_for('adoptor_list') }}">List of Adoptors</a></li>
@@ -46,7 +43,6 @@
 		</div>
 	</nav>
 	<div class="container">
-
 	{% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     <ul class="list-unstyled">
@@ -56,23 +52,16 @@
     </ul>
   {% endif %}
 {% endwith %}
-
-
-
 	{% block content %}{% endblock %}
-
-
 	<hr>
 	<!-- Footer -->
-	<footer>
+	<footer class="footer">
 		<div class="row">
 			<div class="col-lg-12">
 				<p class="text-center">Copyright &copy; AdoptMe.com 2016</p>
 			</div>
 		</div>
 	</footer>
-	
-
 </div> <!-- end container-fluid -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

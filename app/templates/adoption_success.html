@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
-
+{% block title %}AdoptMe.com{% endblock %}
 {% block content %}
 <div class="row">
 	<div class="col-xs-12 col-md-8 col-md-offset-2">
-
-<p class="h4">Are you sure you want <mark>{{ puppy.name }}</mark> to be adopted by <mark>{{ adoptor.name }}</mark>? </p>
-<form method="post" action="">
-<input type="hidden" name="puppyname" value="{{ puppy.id }}"/>
-<input type="hidden" name="adoptorname" value="{{ adoptor.id }}"/>
-<input type='submit'class="btn btn-success col-xs-8 col-xs-offset-2 col-md-3 col-md-offset-2" value="Yes">
-</form>
-
-</div>
+		<p class="h4">Are you sure you want <mark>{{ puppy.name }}</mark> to be adopted by <mark>{{ adoptor.name }}</mark>? </p>
+		<form method="post" action="">
+			<input type="hidden" name="puppyname" value="{{ puppy.id }}"/>
+			<input type="hidden" name="adoptorname" value="{{ adoptor.id }}"/>
+			<input type='submit'class="btn btn-success col-xs-8 col-xs-offset-2 col-md-3 col-md-offset-2" value="Yes">
+		</form>
+	</div>
 </div>
 {% endblock %}

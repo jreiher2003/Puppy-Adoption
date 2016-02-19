@@ -1,16 +1,9 @@
-<!doctype html>
-<html>
-<head>
-	<title>This is a title</title>
-</head>
 
-<body>
-
-	<h2>Hello {{ adoptor.name }}</h2>
-
-	<p>Congratulations on adopting {{ puppy.name }} from {{ puppy.shelter.name }}</p>
+<h2>Hello {{ adoptor.name }}</h2>
+<p>Congratulations on adopting {{ puppy.name }} from {{ puppy.shelter.name }}</p>
+<div class="thumbnail">
 	<img src="{{ puppy.picture }}" alt="{{ puppy.name }}">
-	<p>I hope this little guy makes you and your family happy</p>
-
-</body>
-</html>
+	<div class="caption">
+		<p>I hope this little guy makes you and your family happy</p>
+	</div>
+</div>
