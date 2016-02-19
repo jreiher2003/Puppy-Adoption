@@ -1,5 +1,5 @@
 from flask_wtf import Form 
-from wtforms import TextField, RadioField, BooleanField, TextAreaField, SelectField, IntegerField, SubmitField, SelectMultipleField, StringField
+from wtforms import TextField, RadioField, TextAreaField, SelectField, IntegerField, SubmitField, StringField
 from wtforms.validators import DataRequired, Length, URL, NumberRange, Regexp, Email
 from wtforms.fields.html5 import EmailField
 import us
@@ -36,7 +36,6 @@ class CreatePuppy(Form):
 
 
 class CreateProfile(Form):
-
 	specialNeeds = SelectField('Special Needs', choices=[('None','None'),('3-legged', '3-legged'), ('Blind', 'Blind'),('Deaf', 'Deaf')])
 	description = TextAreaField('Description', validators=[Length(max=500)])
 	breed = SelectField('Breed', choices=[('None','None'),('Bulldog','Bulldog'),('Boston Terrier','Boston Terrier'),('Chihuahua', 'Chihuahua'),('German Shepherd', 'German Shepherd'),("Greyhound","Greyhound"),("Labrador Retriever","Labrador Retriever"),("Maltese","Maltese"),("Schnauzer","Schnauzer"),("Pug","Pug"),("Saint Bernard","Saint Bernard"),("Shih-Tzu","Shih-Tzu"),("Siberian Husky","Siberian Husky"),("Whippet","Whippet")])

@@ -41,7 +41,6 @@ def create_random_age():
 def create_random_weight():
 	return random.uniform(1.0, 75.0)
 
-
 # Query the current occupancy of a specific shelter. 
 def get_shelter_occupancy(shel_id):
 	# return Shelter.query.filter(db.and_(Puppy.shelter_id==Shelter.id, Shelter.id == shel_id)).count()
@@ -50,7 +49,6 @@ def get_shelter_occupancy(shel_id):
 # Query the capacity for a shelter by it's ID.
 def get_shelter_capacity(shel_id):
 	return db.session.query(Shelter.maximum_capacity).filter(Shelter.id == shel_id).one()[0]
-
 
 # A Query that determines which Shelter to place a puppy in.
 def add_puppy_to_shelter():
@@ -62,7 +60,6 @@ def add_puppy_to_shelter():
 		else:
 			arr.remove(shelter_id)
 			
-
 def counting_shows():
 	""" returns a number. counts all show = True from Puppy and is == current_capacity"""
 	update_capacity = db.session.query(Shelter).all()
@@ -71,7 +68,6 @@ def counting_shows():
 		db.session.add(shel)
 		db.session.commit()
 	
-
 def overflow(shelter_id):
 	""" checks to see if current_capacity is less than maximum_capacity """
 	shelter = Shelter.query.filter(Shelter.id == shelter_id).one()
@@ -80,13 +76,11 @@ def overflow(shelter_id):
 	else:
 		return False
 
-
 def send_email(subject, sender, recipients, text_body, html_body):
     msg = Message(subject, sender=sender, recipients=recipients)
     msg.body = text_body
     msg.html = html_body
     mail.send(msg)
-
 
 def twilio_cred():
 	client = TwilioRestClient(

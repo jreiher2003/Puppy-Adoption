@@ -3,18 +3,12 @@ import logging
 import datetime # pragma: no cover
 import random # pragma: no cover
 import us # pragma: no cover
-
 from app import app, db, mail # pragma: no cover
-
- 
 from flask import render_template, url_for, flash, redirect, request # pragma: no cover
 from flask_mail import Message # pragma: no cover
-
 from forms import CreatePuppy, CreateShelter, CreateAdoptor, CreateProfile # pragma: no cover
 from app.models import Shelter, Puppy, Profile, Adoptors, AdoptorsPuppies # pragma: no cover
 from app.utils import * # pragma: no cover
-
-
 
 
 @app.route('/', methods=["GET", "POST"]) # pragma: no cover
@@ -318,10 +312,10 @@ def adoption_success(shelter_id,shelter_name,puppy_id,adoptor_id):
 		send_email(adoptor.name + " just adopted " + puppy.name, "me@jeffreiher.com", ["jreiher2003@yahoo.com"], render_template('email.txt', puppy=puppy, adoptor=adoptor), render_template('email.html', puppy=puppy, adoptor=adoptor))
 		flash('<strong>Successful</strong> adoption', 'success')
 		return redirect(url_for('list_adoptions'))
-	return render_template('adoption_success.html', 
-							puppy=puppy, 
-							adoptor=adoptor,
-							SHELTERS=SHELTERS)
+		return render_template('adoption_success.html', 
+			puppy=puppy, 
+			adoptor=adoptor,
+			SHELTERS=SHELTERS)
 
 
 @app.route('/list-adoptions', methods=['GET', 'POST']) # pragma: no cover

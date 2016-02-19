@@ -1,7 +1,5 @@
 import datetime # pragma: no cover
-
 from app import db # pragma: no cover
-
 from slugify import slugify # pragma: no cover
  
         
@@ -113,12 +111,10 @@ class AdoptorsPuppies(db.Model):
     puppies = db.relationship(Puppy)
     adoptors = db.relationship(Adoptors)
 
-
     def __init__(self, adoptor_id,puppy_id):
         self.adoptor_id = adoptor_id
         self.puppy_id = puppy_id
        
-
     @property 
     def format_date(self):
         return '{dt:%A} {dt:%B} {dt.day}, {dt.year}'.format(dt=self.adopt_date)
