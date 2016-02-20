@@ -42,7 +42,6 @@ shelter5 = Shelter(name = "Palo Alto Humane Society" ,address = "1149 Chestnut S
 db.session.add(shelter5)
 
 db.session.commit()
-
 # #Add Puppies
 
 male_names = ["Bailey", "Max", "Charlie", "Buddy","Rocky","Jake", "Jack", "Toby", "Cody", "Buster", "Duke", "Cooper", "Riley", "Harley", "Bear", "Tucker", "Murphy", "Lucky", "Oliver", "Sam", "Oscar", "Teddy", "Winston", "Sammy", "Rusty", "Shadow", "Gizmo", "Bentley", "Zeus", "Jackson", "Baxter", "Bandit", "Gus", "Samson", "Milo", "Rudy", "Louie", "Hunter", "Casey", "Rocco", "Sparky", "Joey", "Bruno", "Beau", "Dakota", "Maximus", "Romeo", "Boomer", "Luke", "Henry"]
@@ -74,6 +73,9 @@ for i,x in enumerate(female_names):
 	db.session.add(new_puppy)
 	db.session.commit()
 
+adoption = AdoptorsPuppies(adoptor_id=1, puppy_id=1, adopt_date=datetime.datetime.now())
+db.session.add(adoption)
+db.session.commit()
 
 #######################################################################################
 ############  Helpful queries  ########################################################
