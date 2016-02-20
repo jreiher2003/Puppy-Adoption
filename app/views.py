@@ -132,14 +132,23 @@ def new_puppy():
 	form1 = CreateProfile()
 	form.shelter.choices = [(i.id,i.name) for i in shelterq]
 	if form.validate_on_submit() and form1.validate_on_submit:
-		newpuppy = Puppy(name=form.name.data, gender=form.gender.data, dateOfBirth=create_random_age(), picture=form.picture.data, shelter_id=form.shelter.data, weight=create_random_weight(), show=True)
+		newpuppy = Puppy(name=form.name.data, 
+						 gender=form.gender.data, 
+						 dateOfBirth=create_random_age(), 
+						 picture=form.picture.data, 
+						 shelter_id=form.shelter.data, 
+						 weight=create_random_weight(), 
+						 show=True)
 		db.session.add(newpuppy)
 		db.session.commit()
-		newprofile = Profile(breed=form1.breed.data, specialNeeds=form1.specialNeeds.data, description=descriptions(), puppy_id=newpuppy.id)
+		newprofile = Profile(breed=form1.breed.data, 
+							 specialNeeds=form1.specialNeeds.data, 
+							 description=descriptions(), 
+							 puppy_id=newpuppy.id)
 		db.session.add(newprofile)
 		db.session.commit()
 		if overflow(newpuppy.shelter_id):
-			db.session.commit()
+			# db.session.commit()
 			counting_shows()
 			flash('<strong>Successfully</strong> Added '+ '<u>' + newpuppy.name + '</u>' +  ' to ' + newpuppy.shelter.name, 'success')
 			return redirect(url_for('index'))
