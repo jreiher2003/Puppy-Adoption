@@ -311,7 +311,7 @@ def adoption_success(shelter_id,shelter_name,puppy_id,adoptor_id):
 		send_email(adoptor.name + " just adopted " + puppy.name, "me@jeffreiher.com", ["jreiher2003@yahoo.com"], render_template('email.txt', puppy=puppy, adoptor=adoptor), render_template('email.html', puppy=puppy, adoptor=adoptor))
 		flash('<strong>Successful</strong> adoption', 'success')
 		return redirect(url_for('list_adoptions'))
-		return render_template('adoption_success.html', 
+	return render_template('adoption_success.html', 
 			puppy=puppy, 
 			adoptor=adoptor,
 			SHELTERS=SHELTERS)
