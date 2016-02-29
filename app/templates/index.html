@@ -11,7 +11,7 @@
 	<form method="post" action="">
 		{{ form.csrf_token }}
 		<div class="col-md-6 col-md-offset-3 input-group  form-group">
-			{{ form.name(placeholder="Add your name here...", class="form-control") }}
+			{{ form.name(placeholder="Add your name here...", class="form-control input-lg") }}
 			<span class="error bg-danger">
 				{% if form.name.errors %}
 				{% for error in form.name.errors %}
@@ -20,7 +20,7 @@
 				{% endfor %}
 				{% endif %}
 			</span>
-			{{ form.email(placeholder="And an email...", class="form-control") }}
+			{{ form.email(placeholder="And an email...", class="form-control input-lg") }}
 			<span class="error bg-danger">
 				{% if form.email.errors %}
 				{% for error in form.email.errors %}
@@ -29,7 +29,7 @@
 				{% endfor %}
 				{% endif %}
 			</span>
-			{{ form.submit(value="Become an Adoptor", class="form-control btn btn-info") }}
+			{{ form.submit(value="Become an Adoptor", class="form-control btn btn-info input-lg front-button") }}
 		</div>
 	</form>
 </header>

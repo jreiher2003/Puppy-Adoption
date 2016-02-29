@@ -8,7 +8,7 @@
 </blockquote>
 <ul class="list-group">
 	{% for adoption in adoptions %}
-	<li class="list-group-item"><mark><span class="text-primary">{{ adoption.adoptors.name }}</span></mark>	has adopted  <mark><span class="text-success">{{ adoption.puppies.name }}</span></mark> from <mark><span class="text-danger">{{ adoption.puppies.shelter.name }}</span></mark>&nbsp;on&nbsp;<u><i>{{ adoption.format_date }}</i></u>.<span class="label label-danger pull-right">{{ adoption.adopt_date }}</span>&nbsp;&nbsp;</li>
+	<li class="list-group-item"><mark><span class="text-primary">{{ adoption.adoptors.name }}</span></mark>	has adopted  <mark><span class="text-success">{{ adoption.puppies.name }}</span></mark> from <mark><span class="text-danger">{{ adoption.puppies.shelter.name }}</span></mark>&nbsp;on&nbsp;<u><i>{{ adoption.format_date }}</i></u>.<span class="label label-danger pull-right date">{{ adoption.adopt_date }}</span>&nbsp;&nbsp;</li>
 	{% endfor %}
 </ul> 
 

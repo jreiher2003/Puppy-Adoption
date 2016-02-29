@@ -17,3 +17,12 @@ nav {
 div#carousel-example-generic.carousel.slide {
 	margin-bottom: 20px;
 }
+.front-button {
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 900px) {
+    .date {
+        display: none;
+    }
+}
