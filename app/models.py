@@ -59,7 +59,7 @@ class Puppy(db.Model):
     gender = db.Column(db.String(6), nullable = False)
     dateOfBirth = db.Column(db.Date)
     picture = db.Column(db.String)
-    weight = db.Column(db.Numeric(10))
+    weight = db.Column(db.Float(10))
     show = db.Column(db.Boolean, default=True)
     shelter = db.relationship(Shelter)
     profile = db.relationship("Profile", uselist=False, back_populates="puppy", cascade="save-update, merge, delete")
@@ -73,6 +73,19 @@ class Puppy(db.Model):
         self.picture = picture 
         self.weight = weight 
         self.show = show
+
+    @property 
+    def serialize(self):
+        return {
+            "id" : self.id,
+            "shelter_id" : self.shelter_id,
+            "name" : self.name,
+            "gender" : self.gender,
+            "dateOfBirth" : str(self.dateOfBirth),
+            "picture" : self.picture,
+            "weight" :int(self.weight),
+            "show" : self.show
+        }
 
     def __repr__(self):
         return '<name>: {}'.format(self.name)

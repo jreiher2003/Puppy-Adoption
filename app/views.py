@@ -10,10 +10,12 @@ from forms import CreatePuppy, CreateShelter, CreateAdoptor, CreateProfile # pra
 from app.models import Shelter, Puppy, Profile, Adoptors, AdoptorsPuppies # pragma: no cover
 from app.utils import * # pragma: no cover
 
+
 @app.route("/.json")
 def shelters_json():
 	shelters = Shelter.query.all()
 	return jsonify(Shelters=[i.serialize for i in shelters])
+
 
 @app.route("/", methods=["GET", "POST"]) # pragma: no cover
 def index():
@@ -35,6 +37,12 @@ def index():
 							SHELTERS=SHELTERS, 
 							form=form, 
 							error=error)
+
+
+@app.route("/<int:shelter_id>/<path:shelter_name>/.json")
+def shelter_puppy_json(shelter_id, shelter_name):
+	puppy = Puppy.query.filter(Puppy.shelter_id==shelter_id).all()
+	return jsonify(Puppies=[i.serialize for i in puppy])
 
 
 ##  CRUD for Shelter class  ##
