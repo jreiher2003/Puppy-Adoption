@@ -1,5 +1,5 @@
 from random import randint # pragma: no cover
-import logging
+import logging # pragma: no cover
 import datetime # pragma: no cover
 import random # pragma: no cover
 import us # pragma: no cover
@@ -11,10 +11,16 @@ from app.models import Shelter, Puppy, Profile, Adoptors, AdoptorsPuppies # prag
 from app.utils import * # pragma: no cover
 
 
-@app.route("/.json")
+@app.route("/shelters/.json")# pragma: no cover
 def shelters_json():
 	shelters = Shelter.query.all()
 	return jsonify(Shelters=[i.serialize for i in shelters])
+
+
+@app.route("/puppies/.json")# pragma: no cover
+def shelter_puppy_json():
+	puppy = Puppy.query.all()
+	return jsonify(Puppies=[i.serialize for i in puppy])
 
 
 @app.route("/", methods=["GET", "POST"]) # pragma: no cover
@@ -39,15 +45,9 @@ def index():
 							error=error)
 
 
-@app.route("/<int:shelter_id>/<path:shelter_name>/.json")
-def shelter_puppy_json(shelter_id, shelter_name):
-	puppy = Puppy.query.filter(Puppy.shelter_id==shelter_id).all()
-	return jsonify(Puppies=[i.serialize for i in puppy])
-
-
 ##  CRUD for Shelter class  ##
 @app.route('/<int:shelter_id>/<path:shelter_name>/page/<int:page>') # pragma: no cover
-def shelter_profile(shelter_id,shelter_name, page=1):
+def shelter_profile(shelter_id,shelter_name, page=1): 
 	SHELTERS = Shelter.query.all()
 	PUPPY = Puppy.query.filter(Puppy.shelter_id==shelter_id).all()
 	shelter_profile = Shelter.query.filter_by(id=shelter_id).one()
