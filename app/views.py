@@ -4,14 +4,18 @@ import datetime # pragma: no cover
 import random # pragma: no cover
 import us # pragma: no cover
 from app import app, db, mail # pragma: no cover
-from flask import render_template, url_for, flash, redirect, request # pragma: no cover
+from flask import render_template, url_for, flash, redirect, request, jsonify # pragma: no cover
 from flask_mail import Message # pragma: no cover
 from forms import CreatePuppy, CreateShelter, CreateAdoptor, CreateProfile # pragma: no cover
 from app.models import Shelter, Puppy, Profile, Adoptors, AdoptorsPuppies # pragma: no cover
 from app.utils import * # pragma: no cover
 
+@app.route("/.json")
+def shelters_json():
+	shelters = Shelter.query.all()
+	return jsonify(Shelters=[i.serialize for i in shelters])
 
-@app.route('/', methods=["GET", "POST"]) # pragma: no cover
+@app.route("/", methods=["GET", "POST"]) # pragma: no cover
 def index():
 	SHELTERS = Shelter.query.all()
 	""" front page of site that lists all shelters"""
@@ -22,9 +26,9 @@ def index():
 		newadoptor = Adoptors(name=form.name.data,email=form.email.data)
 		db.session.add(newadoptor)
 		db.session.commit()
-		logging.debug('Just created %s-%s', newadoptor.name,newadoptor.email)
-		flash('<strong>Just created</strong> a new adoptor named <u>%s</u>.<br>\
-			Go Checkout the shelter pages to adopt a puppy!' % newadoptor.name, 'info')
+		logging.debug("Just created %s-%s", newadoptor.name,newadoptor.email)
+		flash("<strong>Just created</strong> a new adoptor named <u>%s</u>.<br>\
+			Go Checkout the shelter pages to adopt a puppy!" % newadoptor.name, 'info')
 		return redirect(url_for('adoptor_list'))
 	return render_template('index.html', 
 							shelter=shelter, 

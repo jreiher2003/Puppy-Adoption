@@ -26,7 +26,21 @@ class Shelter(db.Model):
         self.zipCode = zipCode
         self.website = website 
         self.maximum_capacity = maximum_capacity
-        self.current_capacity = current_capacity    
+        self.current_capacity = current_capacity   
+
+    @property 
+    def serialize(self):
+        return {
+            "id" : self.id,
+            "name" : self.name,
+            "address" : self.address,
+            "city" : self.city,
+            "state" : self.state,
+            "zipCode" : self.zipCode,
+            "website" : self.website,
+            "maximum_capacity" : self.maximum_capacity,
+            "current_capacity" : self.current_capacity
+        } 
 
     @property 
     def name_slug(self):
