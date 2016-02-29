@@ -73,12 +73,19 @@ class TestFunctionalCase(BaseTestCase):
         response = self.client.get("shelters/.json")
         self.assertEqual(response.status_code, 200)
 
+
     def test_puppy_json(self):
         puppy = Puppy.query.all()
         response = self.client.get("puppies/.json")
         self.assertEqual(response.status_code, 200)
+
+
+    def test_api(self):
+        response = self.client.get("/api")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b"Welcome to Adoptme's API", response.data)
         
-\
+
 
    
 

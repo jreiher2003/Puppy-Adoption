@@ -22,6 +22,10 @@ def shelter_puppy_json():
 	puppy = Puppy.query.all()
 	return jsonify(Puppies=[i.serialize for i in puppy])
 
+@app.route("/api")# pragma: no cover
+def api():
+	return render_template("api.html")
+
 
 @app.route("/", methods=["GET", "POST"]) # pragma: no cover
 def index():
