@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Create Puppy{% endblock %}
 {% block content %}
+<div class="container">
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<p class="h3 text-center">Check a puppy in to a shelter</p>
@@ -29,7 +30,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-xs-12 col-md-6">
 					<div class="form-group">
 						{{ form1.breed.label }}{{ form1.breed(class="selectpicker pull-right",  title="Choose one of the following...") }}
 					</div>
@@ -63,6 +64,7 @@
 			</div>
 		</form>
 	</div>
+</div>
 </div>
 <br><br><br>
 {% endblock %}

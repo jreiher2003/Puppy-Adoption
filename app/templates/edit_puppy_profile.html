@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 {% block title %}Edit Puppy{% endblock %}
 {% block content %}
-
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<img class="img-circle center-block" src="{{ editpuppy.picture }}">
+		</div>
+	</div>
+<div class="container">
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
-	<p class="h3 text-center">Edit a puppy</p>
+		<p class="h3 text-center">Edit a puppy</p>
+
+			
 	<form method="post" class="form-horizontal"action="">
 		{{ form.csrf_token }}
 		<div class="form-group">
@@ -87,6 +94,7 @@
 			</div>
 		</form>
 	</div>
+</div>
 </div>
 <br><br><br>
 
