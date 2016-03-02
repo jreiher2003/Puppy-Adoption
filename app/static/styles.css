@@ -25,4 +25,7 @@ div#carousel-example-generic.carousel.slide {
     .date {
         display: none;
     }
+    #carousel-example-generic {
+        display: none;
+    }
 }
