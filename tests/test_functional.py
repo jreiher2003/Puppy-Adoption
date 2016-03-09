@@ -61,8 +61,8 @@ class TestFunctionalCase(BaseTestCase):
         self.assertEqual(response1.status_code, 200)
         self.assertIn(b'<strong>Successful</strong> adoption', response1.data)
         self.assertIn(b'List of past adoptions', response1.data)
-        self.assertIn(b'Billtest</span></mark>\thas adopted  <mark><span class="text-success">Billpup</span></mark> from <mark><span class="text-danger">Testshelter', response1.data)
-        self.assertIn(b'Testname</span></mark>\thas adopted  <mark><span class="text-success">Testpup</span></mark> from <mark><span class="text-danger">Testshelter', response1.data)
+        self.assertIn(b'Billtest</span></mark> has adopted  <mark><span class="text-success">Billpup</span></mark> from <mark><span class="text-danger">Testshelter</span>', response1.data)
+        self.assertIn(b'Testname</span></mark> has adopted  <mark><span class="text-success">Testpup</span></mark> from <mark><span class="text-danger">Testshelter', response1.data)
 
     def test_shelter_json(self):
         shelter = Shelter.query.all()
