@@ -22,15 +22,12 @@ class TestModelCase(BaseTestCase):
             db.session.query(Adoptors).filter(Adoptors.name=='New name').first()
             is not None)
 
-
-	def test_model_tablenames(self):
-		# adoptor = Adoptors.query.all()
-		assert Adoptors.__tablename__== 'adoptors'
-		assert Shelter.__tablename__ =='shelter'
-		assert Puppy.__tablename__=='puppy'
-		assert Profile.__tablename__ == 'profile'
-		assert AdoptorsPuppies.__tablename__=='adoptors_puppies'
+    def test_model_tablenames(self):
+        assert Adoptors.__tablename__== 'adoptors'
+        assert Shelter.__tablename__ =='shelter'
+        assert Puppy.__tablename__=='puppy'
+        assert Profile.__tablename__ == 'profile'
+        assert AdoptorsPuppies.__tablename__=='adoptors_puppies'
 
 
-	# def test_model_repr(self):
-		
+        

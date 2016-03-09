@@ -1,12 +1,11 @@
 import unittest
 import datetime
 from base import BaseTestCase
-
 from app.models import Puppy
 
 
 class TestPuppyCase(BaseTestCase):
-# Ensure that /new-puppy response is correct
+
     def test_puppy_page(self):
         response = self.client.get('/new-puppy', content_type='html/text')
         self.assertEqual(response.status_code, 200)

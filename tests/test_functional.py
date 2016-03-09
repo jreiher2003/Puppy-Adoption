@@ -25,7 +25,6 @@ class TestFunctionalCase(BaseTestCase):
         shelter = Shelter.query.filter_by(name='Testshelter').first()
         self.assertTrue(str(shelter) == '<name>: Testshelter')
         
-
     # Ensure that the login page loads correctly
     def test_index_puppy_profile_page_loads(self):
         response = self.client.get('/1/testshelter/profile/1')
@@ -46,7 +45,6 @@ class TestFunctionalCase(BaseTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Who do you want to adopt <u>Billpup</u>?', response.data)
 
-
     def test_index_adopt_puppy_post(self):
         response = self.client.post('/1/testshelter/profile/2/adopt/', data=dict(pupadopt=2))
         self.assertEqual(response.status_code, 302)
@@ -55,7 +53,6 @@ class TestFunctionalCase(BaseTestCase):
         response = self.client.get('/1/testshelter/profile/2/adopt/2/', content_type='html/text')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Are you sure you want <mark>Billpup</mark> to be adopted by <mark>Billtest</mark>?', response.data)
-
 
     def test_index_adopt_2_puppy_post(self):
         response = self.client.post('/1/testshelter/profile/2/adopt/2/', data=dict(puppyname='2', adoptorname='2'))
@@ -67,18 +64,15 @@ class TestFunctionalCase(BaseTestCase):
         self.assertIn(b'Billtest</span></mark>\thas adopted  <mark><span class="text-success">Billpup</span></mark> from <mark><span class="text-danger">Testshelter', response1.data)
         self.assertIn(b'Testname</span></mark>\thas adopted  <mark><span class="text-success">Testpup</span></mark> from <mark><span class="text-danger">Testshelter', response1.data)
 
-  
     def test_shelter_json(self):
         shelter = Shelter.query.all()
         response = self.client.get("shelters/.json")
         self.assertEqual(response.status_code, 200)
 
-
     def test_puppy_json(self):
         puppy = Puppy.query.all()
         response = self.client.get("puppies/.json")
         self.assertEqual(response.status_code, 200)
-
 
     def test_api(self):
         response = self.client.get("/api")

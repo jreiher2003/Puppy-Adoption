@@ -9,11 +9,11 @@ import random
 db.create_all() 
 
 def count_pups():
-	shelter = db.session.query(Shelter).all()
-	for shel in shelter:
-		shel.current_capacity = db.session.query(Puppy, Shelter).join(Shelter).filter(Shelter.id == shel.id).count()
-		db.session.add(shel)
-		db.session.commit()
+    shelter = db.session.query(Shelter).all()
+    for shel in shelter:
+        shel.current_capacity = db.session.query(Puppy, Shelter).join(Shelter).filter(Shelter.id == shel.id).count()
+        db.session.add(shel)
+        db.session.commit()
 
 adoptor1 = Adoptors(name="Jeff", email='jreiher2003@yahoo.com')
 db.session.add(adoptor1)
@@ -54,24 +54,24 @@ puppy_images = ["https://pixabay.com/static/uploads/photo/2015/03/26/09/54/pug-6
 
 #This method will make a random age for each puppy between 0-18 months(approx.) old from the day the algorithm was run.
 def CreateRandomAge():
-	today = datetime.date.today()
-	days_old = randint(0,540)
-	birthday = today - datetime.timedelta(days = days_old)
-	return birthday
+    today = datetime.date.today()
+    days_old = randint(0,540)
+    birthday = today - datetime.timedelta(days = days_old)
+    return birthday
 
 #This method will create a random weight between 1.0-40.0 pounds (or whatever unit of measure you prefer)
 def CreateRandomWeight():
-	return random.uniform(1.0, 40.0)
+    return random.uniform(1.0, 40.0)
 
 for i,x in enumerate(male_names):
-	new_puppy = Puppy(name = x, gender = "male", dateOfBirth = CreateRandomAge(),picture=random.choice(puppy_images), show=True, shelter_id=randint(1,5), weight= CreateRandomWeight())
-	db.session.add(new_puppy)
-	db.session.commit()
+    new_puppy = Puppy(name = x, gender = "male", dateOfBirth = CreateRandomAge(),picture=random.choice(puppy_images), show=True, shelter_id=randint(1,5), weight= CreateRandomWeight())
+    db.session.add(new_puppy)
+    db.session.commit()
 
 for i,x in enumerate(female_names):
-	new_puppy = Puppy(name = x, gender = "female", dateOfBirth = CreateRandomAge(),picture=random.choice(puppy_images), show=True, shelter_id=randint(1,5), weight= CreateRandomWeight())
-	db.session.add(new_puppy)
-	db.session.commit()
+    new_puppy = Puppy(name = x, gender = "female", dateOfBirth = CreateRandomAge(),picture=random.choice(puppy_images), show=True, shelter_id=randint(1,5), weight= CreateRandomWeight())
+    db.session.add(new_puppy)
+    db.session.commit()
 
 adoption = AdoptorsPuppies(adoptor_id=1, puppy_id=1, adopt_date=datetime.datetime.now())
 db.session.add(adoption)
@@ -95,58 +95,58 @@ def get_puppies_by_weight():
 
 # Query all puppies and group by shelter
 def get_puppies_by_shelter():
-	return db.session.query(Puppy, Shelter).join(Shelter).order_by(Puppy.shelter_id).all()
+    return db.session.query(Puppy, Shelter).join(Shelter).order_by(Puppy.shelter_id).all()
 
 # Query the current occupancy of a specific shelter. 
 def get_shelter_occupancy(shel_id):
-	# return Shelter.query.filter(db.and_(Puppy.shelter_id==Shelter.id, Shelter.id == shel_id)).count()
-	return db.session.query(Puppy, Shelter).join(Shelter).filter(Shelter.id == shel_id).count()
+    # return Shelter.query.filter(db.and_(Puppy.shelter_id==Shelter.id, Shelter.id == shel_id)).count()
+    return db.session.query(Puppy, Shelter).join(Shelter).filter(Shelter.id == shel_id).count()
 
 # print get_shelter_occupancy(1)
 # Query the capacity for a shelter by it's ID.
 def get_shelter_capacity(shel_id):
-	return db.session.query(Shelter.maximum_capacity).filter(Shelter.id == shel_id).one()[0]
+    return db.session.query(Shelter.maximum_capacity).filter(Shelter.id == shel_id).one()[0]
 
 # print get_shelter_capacity(1)
 # A Query that determines which Shelter to place a puppy in.
 def add_puppy_to_shelter(puppy_id, shelter_id):
-	shelter_id = randint(1,5)
-	if (get_shelter_occupancy(shelter_id) <= get_shelter_capacity(shelter_id)):
-		sheltered_puppy = session.query(Puppy).filter(Puppy.id == puppy_id).one()
-		sheltered_puppy.shelter_id = shelter_id
-		session.add(sheltered_puppy)
-		session.commit()
-		print "Puppy added to shelter."
-		return None
-	unsheletered_puppy = session.query(Puppy).filter(Puppy.id == puppy_id).one()
-	print '%s has been put to sleep. There was no room in the shelter.' % unsheletered_puppy.name
-	session.delete(unsheletered_puppy)
-	session.commit()
-	return None
+    shelter_id = randint(1,5)
+    if (get_shelter_occupancy(shelter_id) <= get_shelter_capacity(shelter_id)):
+        sheltered_puppy = session.query(Puppy).filter(Puppy.id == puppy_id).one()
+        sheltered_puppy.shelter_id = shelter_id
+        session.add(sheltered_puppy)
+        session.commit()
+        print "Puppy added to shelter."
+        return None
+    unsheletered_puppy = session.query(Puppy).filter(Puppy.id == puppy_id).one()
+    print '%s has been put to sleep. There was no room in the shelter.' % unsheletered_puppy.name
+    session.delete(unsheletered_puppy)
+    session.commit()
+    return None
 
 
 # A Query that removes a puppy from it's Shelter and adds it to a home.
 def adopt_puppies(puppy_id, adopter_list):
-	adopted_puppy = session.query(Puppy).filter(Puppy.id == puppy_id).one()
-	adopted_puppy.shelter_id = None
-	session.add(adopted_puppy)
-	
-	for adopter in adopter_list:
-		new_adoption = AdoptorsPuppies(adoptor_id = adopter, puppy_id = adopted_puppy.id)
-		session.add(new_adoption)
-		session.commit()
-	
-	return None
+    adopted_puppy = session.query(Puppy).filter(Puppy.id == puppy_id).one()
+    adopted_puppy.shelter_id = None
+    session.add(adopted_puppy)
+    
+    for adopter in adopter_list:
+        new_adoption = AdoptorsPuppies(adoptor_id = adopter, puppy_id = adopted_puppy.id)
+        session.add(new_adoption)
+        session.commit()
+    
+    return None
 
 
 def populate_profile():
-	""" function to populate description column of Profile table """
-	puppy = db.session.query(Puppy).all()
-	for pup in puppy:
-		new_profile = Profile(breed=breeds(), description=descriptions(), specialNeeds=special_needs(), puppy_id=pup.id)
-		db.session.add(new_profile)
-		db.session.commit()
-	print "profile update"
+    """ function to populate description column of Profile table """
+    puppy = db.session.query(Puppy).all()
+    for pup in puppy:
+        new_profile = Profile(breed=breeds(), description=descriptions(), specialNeeds=special_needs(), puppy_id=pup.id)
+        db.session.add(new_profile)
+        db.session.commit()
+    print "profile update"
 populate_profile()
 
 
@@ -154,13 +154,13 @@ populate_profile()
 # count_pups()
 
 # def add_puppy_to_shelter():
-# 	arr = [1,2,3,4,5]
-# 	while len(arr) > 0:
-# 		shelter_id = random.choice(arr)
-# 		if (get_shelter_occupancy(shelter_id) < get_shelter_capacity(shelter_id)):
-# 			return shelter_id
-# 		else:
-# 			arr.remove(shelter_id)
+#   arr = [1,2,3,4,5]
+#   while len(arr) > 0:
+#       shelter_id = random.choice(arr)
+#       if (get_shelter_occupancy(shelter_id) < get_shelter_capacity(shelter_id)):
+#           return shelter_id
+#       else:
+#           arr.remove(shelter_id)
 # print add_puppy_to_shelter()
 
 
@@ -173,21 +173,21 @@ populate_profile()
 # print profile_puppy_one()
 
 def counting_shows():
-	update_capacity = db.session.query(Shelter).all()
-	for shel in update_capacity:
-		shel.current_capacity = db.session.query(Puppy, Shelter).join(Shelter).filter(db.and_(Shelter.id == shel.id, Puppy.show==True)).count()
-		db.session.add(shel)
-		db.session.commit()
-	print "Successful update"
+    update_capacity = db.session.query(Shelter).all()
+    for shel in update_capacity:
+        shel.current_capacity = db.session.query(Puppy, Shelter).join(Shelter).filter(db.and_(Shelter.id == shel.id, Puppy.show==True)).count()
+        db.session.add(shel)
+        db.session.commit()
+    print "Successful update"
 
 counting_shows()
 
 # make sure maximum_capacity > current_capacity
 # def overflow(shelter_id):
-# 	shelter = Shelter.query.filter(Shelter.shelter_id).one()
-	
-# 	if shelter.current_capacity < shelter.maximum_capacity:
-# 		return True
-# 	else:
-# 		return False
+#   shelter = Shelter.query.filter(Shelter.shelter_id).one()
+    
+#   if shelter.current_capacity < shelter.maximum_capacity:
+#       return True
+#   else:
+#       return False
 # print overflow()

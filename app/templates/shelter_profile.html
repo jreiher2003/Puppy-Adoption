@@ -2,7 +2,7 @@
 {% block title %}{{ shelter_profile.name }}{% endblock %}
 {% block content %}
 <div class="row">
-	<div class="col-md-3">
+    <div class="col-md-3">
         <address>
             <strong>{{ shelter_profile.name }}</strong><br>
             {{ shelter_profile.address }}<br>
@@ -11,34 +11,34 @@
         </address>
     </div><!-- end col-md-3 -->
     <div class="col-md-8">
-    	<div class="row carousel-holder">
-    		<div class="col-md-12">
-    			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    				<ol class="carousel-indicators">
+        <div class="row carousel-holder">
+            <div class="col-md-12">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
                         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    					<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-    				</ol>
-    				<div class="carousel-inner">
-    					<div class="item active">
-    						<img class="slide-image" src="{{ url_for('static', filename='images/sun_r.jpg') }}" alt="">
-    					</div>
-    					<div class="item">
-    						<img class="slide-image" src="{{ url_for('static', filename='images/sunset_r.jpg') }}" alt="">
-    					</div>
-    					<div class="item">
-    						<img class="slide-image" src="{{ url_for('static', filename='images/jetty_r.jpg') }}" alt="">
-    					</div>
-    				</div>
-    				<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-    					<span class="glyphicon glyphicon-chevron-left"></span>
-    				</a>
-    				<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-    					<span class="glyphicon glyphicon-chevron-right"></span>
-    				</a>
-    			</div><!-- end carousel slide -->
-    		</div> <!-- end col-md-12 -->
-    	</div><!-- end row carousel-holder -->
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img class="slide-image" src="{{ url_for('static', filename='images/sun_r.jpg') }}" alt="">
+                        </div>
+                        <div class="item">
+                            <img class="slide-image" src="{{ url_for('static', filename='images/sunset_r.jpg') }}" alt="">
+                        </div>
+                        <div class="item">
+                            <img class="slide-image" src="{{ url_for('static', filename='images/jetty_r.jpg') }}" alt="">
+                        </div>
+                    </div>
+                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div><!-- end carousel slide -->
+            </div> <!-- end col-md-12 -->
+        </div><!-- end row carousel-holder -->
         <div class="row">
            {% for pup in puppy.items %}
            <div class="col-md-6 pull-right">

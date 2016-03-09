@@ -13,7 +13,6 @@ class TestAdoptorCase(BaseTestCase):
         self.assertIn(b'A list of potenial Adoptors', response.data)
         self.assertIn(b'Testname', response.data)
 
-      
     def test_adoptors_new_adoptor_page_loads(self):
         """ Tests that /new-adoptor page loads """
         response = self.client.get('/new-adoptor', content_type='html/text')

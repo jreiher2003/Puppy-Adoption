@@ -3,67 +3,67 @@
 {% block content %}
 <div class="container">
 <div class="row">
-	<div class="col-md-8 col-md-offset-2">
-		<p class="h3 text-center">Check a puppy in to a shelter</p>
-		<form method="post" class="form-horizontal"action="">
-			{{ form.csrf_token }}
-			<div class="form-group">
-				{{ form.name.label }}{{ form.name(class="form-control", placeholder="Name...") }}<br>
-				<span class="error bg-danger">
-					{% if form.name.errors %}
-					{% for error in form.name.errors %}
-					<div class="bg-danger">{{ error }}</div>
-					{% endfor %}
-					{% endif %}
-				</span>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						{{ form.gender.label() }}{{ form.gender(class="radio") }}
-						<span class="error bg-danger">
-							{% if form.gender.errors %}
-							{% for error in form.gender.errors %}
-							<div class="bg-danger">{{ error }}</div>
-							{% endfor %}
-							{% endif %}
-						</span>
-					</div>
-				</div>
-				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
-						{{ form1.breed.label }}{{ form1.breed(class="selectpicker pull-right",  title="Choose one of the following...") }}
-					</div>
-					<div class="form-group">
-						{{ form1.specialNeeds.label }}{{ form1.specialNeeds(class="selectpicker pull-right") }}<br>
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				{{ form.picture.label }}{{ form.picture(class="form-control", placeholder="https://pixabay.com/") }}<br>
-				<span class="error bg-danger">
-					{% if form.picture.errors %}
-					{% for error in form.picture.errors %}
-					<div class="bg-danger">{{ error }}</div>
-					{% endfor %}
-					{% endif %}
-				</span>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">	
-						{{ form.shelter.label }} {{ form.shelter(class="selectpicker") }}<br>
-					</div>	
-				</div>
-				<div class="col-md-6">
-				</div>
-			</div>
-			<div class="form-group">
-				{{ form.submit(class="form-control btn btn-danger") }}
-				<a class="form-control btn btn-default" href="{{url_for('index')}}">Cancel</a>
-			</div>
-		</form>
-	</div>
+    <div class="col-md-8 col-md-offset-2">
+        <p class="h3 text-center">Check a puppy in to a shelter</p>
+        <form method="post" class="form-horizontal"action="">
+            {{ form.csrf_token }}
+            <div class="form-group">
+                {{ form.name.label }}{{ form.name(class="form-control", placeholder="Name...") }}<br>
+                <span class="error bg-danger">
+                    {% if form.name.errors %}
+                    {% for error in form.name.errors %}
+                    <div class="bg-danger">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </span>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.gender.label() }}{{ form.gender(class="radio") }}
+                        <span class="error bg-danger">
+                            {% if form.gender.errors %}
+                            {% for error in form.gender.errors %}
+                            <div class="bg-danger">{{ error }}</div>
+                            {% endfor %}
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        {{ form1.breed.label }}{{ form1.breed(class="selectpicker pull-right",  title="Choose one of the following...") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form1.specialNeeds.label }}{{ form1.specialNeeds(class="selectpicker pull-right") }}<br>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.picture.label }}{{ form.picture(class="form-control", placeholder="https://pixabay.com/") }}<br>
+                <span class="error bg-danger">
+                    {% if form.picture.errors %}
+                    {% for error in form.picture.errors %}
+                    <div class="bg-danger">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </span>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">    
+                        {{ form.shelter.label }} {{ form.shelter(class="selectpicker") }}<br>
+                    </div>  
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="form-control btn btn-danger") }}
+                <a class="form-control btn btn-default" href="{{url_for('index')}}">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>
 </div>
 <br><br><br>

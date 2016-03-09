@@ -1,13 +1,9 @@
 import unittest
 from base import BaseTestCase
-
-# from app import app, db
 from app.models import Shelter
-
 
 class TestShelterCase(BaseTestCase):
 
-	 # Ensure that /new-shelterresponse is correct
     def test_shelter_new_page(self):
         response = self.client.get('/new-shelter', content_type='html/text')
         self.assertEqual(response.status_code, 200)
@@ -43,7 +39,6 @@ class TestShelterCase(BaseTestCase):
         response = self.client.post('/1/testshelter/edit/', data=dict(name="Testshelter", address="123 Fake st.", city="Fake", state="Florida", zipCode="12345", website="http://test.com", maximum_capacity=10, current_capacity=6), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'<strong>Update</strong>&nbsp; on <u>Testshelter</u>.', response.data)
-
 
     def test_shelter_delete_page(self):
         response = self.client.get('/1/testshelter/delete/', content_type='html/text')

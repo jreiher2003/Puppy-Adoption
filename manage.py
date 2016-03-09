@@ -1,13 +1,11 @@
 import os
 import unittest
 import coverage
-# from flask.ext.testing import Test
 from app import app,db
 
 from flask.ext.script import Manager 
 from flask.ext.migrate import Migrate, MigrateCommand 
 import logging
-
 
 app.config.from_object(os.environ['APP_SETTINGS'])
 migrate = Migrate(app, db)
@@ -17,9 +15,9 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def test():
-	"""Runs the tests without coverage."""
-	tests = unittest.TestLoader().discover('tests')
-	unittest.TextTestRunner(verbosity=2).run(tests)
+    """Runs the tests without coverage."""
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner(verbosity=2).run(tests)
 
 @manager.command
 def cov():
@@ -38,5 +36,4 @@ def cov():
     cov.erase()
 
 if __name__ == '__main__':
-    # logging.basicConfig(filename='adopt_log.log', filemode='w' ,level=logging.DEBUG)
     manager.run()

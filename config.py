@@ -1,7 +1,5 @@
 import os
 
-
-# default config
 class BaseConfig(object):
     DEBUG = False
     SQLALCHEMY_TRACK_MODIFICATIONS = True
@@ -13,22 +11,18 @@ class BaseConfig(object):
     MAIL_USERNAME = os.environ['MAIL_USERNAME']
     MAIL_PASSWORD = os.environ['MAIL_PASSWORD']
     
-    # print SQLALCHEMY_DATABASE_URI
    
-
 class TestConfig(BaseConfig):
     DEBUG = True
     TESTING = True
     MAIL_SUPPRESS_SEND = False
     WTF_CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
-    # print SQLALCHEMY_DATABASE_URI
-
+    
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
-    # print SQLALCHEMY_DATABASE_URI
-
+    
 
 class ProductionConfig(BaseConfig):
     DEBUG = False
