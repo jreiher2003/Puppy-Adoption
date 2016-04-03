@@ -3,7 +3,6 @@
 venv/
 *.bat
 coverage/
-*.ini
 *.log
 
 
